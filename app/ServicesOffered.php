@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class ServicesOffered extends Model
 {
     protected $fillable = [
-      'strServiceOffName',
+      'ServiceOffName',
       'todelete',
       'status',
+      'duration',
+      'unit',
+      'ServiceDesc',
+      
     ];
     public $timestamps = false;
-    protected $primaryKey = 'intServiceOffID';
     protected $table = 'tblServicesOffered';
 }

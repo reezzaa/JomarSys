@@ -45,6 +45,33 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'projectmanager' => [
+            'driver' => 'session',
+            'provider' => 'projectmanager',
+        ],
+
+        'pm-api' => [
+            'driver' => 'token',
+            'provider' => 'projectmanager',
+        ],
+        'operations' => [
+            'driver' => 'session',
+            'provider' => 'operations',
+        ],
+
+        'o-api' => [
+            'driver' => 'token',
+            'provider' => 'operations',
+        ],
+        'budgetdepartment' => [
+            'driver' => 'session',
+            'provider' => 'budgetdepartment',
+        ],
+
+        'bd-api' => [
+            'driver' => 'token',
+            'provider' => 'budgetdepartment',
+        ],
     ],
 
     /*
@@ -69,6 +96,19 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+         'projectmanager' => [
+            'driver' => 'eloquent',
+            'model' => App\ProjectManager::class,
+        ],
+        'budgetdepartment' => [
+            'driver' => 'eloquent',
+            'model' => App\BudgetDepartment::class,
+        ],
+        'operations' => [
+            'driver' => 'eloquent',
+            'model' => App\Operations::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -94,6 +134,21 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+         'projectmanager' => [
+            'provider' => 'projectmanager',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'budgetdepartment' => [
+            'provider' => 'budgetdepartment',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'operations' => [
+            'provider' => 'operations',
             'table' => 'password_resets',
             'expire' => 60,
         ],

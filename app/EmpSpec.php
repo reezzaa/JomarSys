@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class EmpSpec extends Model
 {
    protected $fillable = [
-      'strESEmpID',
-      'intESSpecID',
+      'EmpID',
+      'SpecID',
     ];
     public $timestamps = false;
-    protected $primaryKey = 'intEmpSpecID';
     protected $table = 'tblempspec';
 }

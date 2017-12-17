@@ -58,7 +58,7 @@ var TablesDatatables = function() {
                 //Equipment
                 $('#equipment-datatable').dataTable({
                     "aaSorting": [ [0,'asc'] ],
-                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 4,5 ] } ],
+                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 5,6 ] } ],
                     "iDisplayLength": 10,
                     "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
                 });
@@ -79,7 +79,7 @@ var TablesDatatables = function() {
                 //Specialization
                 $('#specialization-datatable').dataTable({
                     "aaSorting": [ [0,'asc'] ],
-                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 1,2 ] } ],
+                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 2,3 ] } ],
                     "iDisplayLength": 10,
                     "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
                 });
@@ -165,6 +165,19 @@ var TablesDatatables = function() {
                     "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
                     });
 
+            //utilities
+            $('#rate-datatable').dataTable({
+                "aaSorting": [ [0,'asc'] ],
+                "aoColumnDefs": [ { "bSearchable": false ,"bSortable": false, "aTargets": [ 2,3 ] } ],
+                "iDisplayLength": 10,
+                "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
+            });
+            $('#form-datatable').dataTable({
+                "aaSorting": [ [0,'asc'] ],
+                "aoColumnDefs": [ { "bSearchable": false ,"bSortable": false, "aTargets": [ 1,2 ] } ],
+                "iDisplayLength": 10,
+                "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
+            });
 
             $('#4col-datatable').dataTable({
                 "aaSorting": [ [0,'asc'] ],

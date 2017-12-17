@@ -4,332 +4,251 @@
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-| 
+|
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware'=>['auth']], function(){
-	Route::get('/',['as'=>'/','uses'=>'LoginController@getLogin']);
-});
-Route::post('/login',['as'=>'login','uses'=>'LoginController@postLogin']);
 
-Route::get('/noPermission',function(){
-	return view('noPermission');
-});
-
-Route::group(['middleware'=>['auth']], function(){
-	Route::get('/logout',['as'=>'logout','uses'=>'LoginController@getLogout']);
-	Route::get('/dashboard','AdminHomeController@index')->name('dashboard');
-	Route::get('dashbWorkers','AdminHomeController@readWorkers');
-	Route::get('dashbServices','AdminHomeController@readServices');
-	Route::get('dashbTrucks','AdminHomeController@readTrucks');
-	Route::get('dashbIndClients','AdminHomeController@readIndClients');
-	Route::get('dashbCompClients','AdminHomeController@readCompClients');
-	Route::get('dashbContracts','AdminHomeController@readContracts');
-
-	//////////////////////////////////////////////////////////////
-	//UTILITIES
-	//
-	Route::resource('utilities','UtilitiesController');
-	Route::post('addEmpID','UtilitiesController@storeEmpID');
-	Route::post('addClientID','UtilitiesController@storeClientID');
-	Route::post('addQuoteID','UtilitiesController@storeQuoteID');
-	Route::post('addContractID','UtilitiesController@storeContractID');
-	Route::post('addInvoiceID','UtilitiesController@storeInvoiceID');
-	Route::post('addDeliveryID','UtilitiesController@storeDeliveryID');
-	Route::post('addOrID','UtilitiesController@storeOrID');
-
-	//
-	//////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////
-	//MAINTENANCE
-	//Specialize
-	Route::resource('specialization','SpecializationController');
-	Route::get('readByAjax7','SpecializationController@readByAjax');
-	Route::put('specialization/checkbox/{id}', 'SpecializationController@checkbox');
-	Route::put('specialization/{id}/delete ','SpecializationController@delete');
-	//Worker
-	Route::resource('worker','EmployeeController');
-	Route::get('worker/{id}/editSpec','EmployeeController@editSpec');
-	Route::resource('empspec','EmpSpecController');
-	Route::get('readByAjax8','EmployeeController@readByAjax');
-	Route::put('worker/checkbox/{id}', 'EmployeeController@checkbox');
-	Route::put('worker/{id}/delete ','EmployeeController@delete');
-	//Add Worker
-	Route::resource('addworker','AddEmployeeController');
-	Route::resource('workerspec','EmpSpecController');
-	//Group UOM
-	Route::resource('groupuomeasure','GroupUOMController');
-	Route::get('readByAjax10','GroupUOMController@readByAjax');
-	Route::put('groupuomeasure/checkbox/{id}', 'GroupUOMController@checkbox');
-	Route::put('groupuomeasure/{id}/delete ','GroupUOMController@delete');
-	//Detail UOM
-	Route::resource('detailuomeasure','DetailUOMController');
-	Route::get('readByAjax11','DetailUOMController@readByAjax');
-	Route::put('detailuomeasure/checkbox/{id}', 'DetailUOMController@checkbox');
-	Route::put('detailuomeasure/{id}/delete ','DetailUOMController@delete');
-	//Material Type
-	Route::resource('materialtype','MaterialTypeController');
-	Route::get('readByAjax9','MaterialTypeController@readByAjax');
-	Route::put('materialtype/checkbox/{id}', 'MaterialTypeController@checkbox');
-	Route::put('materialtype/{id}/delete ','MaterialTypeController@delete');
-	//Material Class
-	Route::resource('materialclass','MaterialClassController');
-	Route::get('readByAjax','MaterialClassController@readByAjax');
-	Route::put('materialclass/checkbox/{id}', 'MaterialClassController@checkbox');
-	Route::put('materialclass/{id}/delete ','MaterialClassController@delete');
-	//Material Category
-	//Route::resource('materialcat','MaterialCatController');
-	//Route::get('readByAjax9','MaterialCatController@readByAjax');
-	//Route::put('materialcat/checkbox/{id}', 'MaterialCatController@checkbox');
-	//Route::put('materialcat/{id}/delete ','MaterialCatController@delete');
-	//Route::get('materialcat/{id}/editSubCat','MaterialCatController@editSubCat');
-	//Material
-	Route::resource('material','MaterialController');
-	Route::get('readByAjax2','MaterialController@readByAjax');
-	Route::put('material/checkbox//{id}', 'MaterialController@checkbox');
-	Route::put('material/{id}/delete ','MaterialController@delete');
-	Route::get('getMatClass/{id}','MaterialController@getMatClass');
-	//Route::get('getMatCat/{id}','MaterialController@getMatCat');
-	//Route::get('getMatSubCat/{id}','MaterialController@getMatSubCat');
-	Route::get('getMatUOM/{id}','MaterialController@getMatUOM');
-	Route::get('getMatSymbol/{id}','MaterialController@getMatSymbol');
-	//EquipmentType
-	Route::resource('equiptype','EquipTypeController');
-	Route::get('readByAjax3','EquipTypeController@readByAjax');
-	Route::put('equiptype/checkbox/{id}', 'EquipTypeController@checkbox');
-	Route::put('equiptype/{id}/delete ','EquipTypeController@delete');
-	//Equipment
-	Route::resource('equipment','EquipmentController');
-	Route::get('readByAjax4','EquipmentController@readByAjax');
-	Route::put('equipment/checkbox/{id}', 'EquipmentController@checkbox');
-	Route::put('equipment/{id}/delete ','EquipmentController@delete');
-	//Services Offered
-	Route::resource('serviceOff','ServicesOfferedController');
-	Route::get('readByAjax5','ServicesOfferedController@readByAjax');
-	Route::put('serviceOff/checkbox/{id}', 'ServicesOfferedController@checkbox');
-	Route::put('serviceOff/{id}/delete ','ServicesOfferedController@delete');
-	//Delivery Trucks
-	Route::resource('deliverytruck','DeliveryTruckController');
-	Route::get('readByAjax6','DeliveryTruckController@readByAjax');
-	Route::put('deliverytruck/checkbox/{id}', 'DeliveryTruckController@checkbox');
-	Route::put('deliverytruck/{id}/delete ','DeliveryTruckController@delete');
-	//Discount
-	Route::resource('discount','DiscountController');
-	Route::get('readByAjax12','DiscountController@readByAjax');
-	Route::put('discount/checkbox/{id}', 'DiscountController@checkbox');
-	Route::put('discount/{id}/delete ','DiscountController@delete');
-	///////////////////////////////////////////////////////////////////////////////
-	//TRANSACTION
-	//Client
-	Route::resource('client','ClientController');
-	Route::resource('newcompclient','CompanyClientController');
-	Route::resource('newindclient','IndividualClientController');
-	//Qoute
-	Route::resource('quote','QuoteController');
-	Route::get('draftQuotesAjax','QuoteController@draftQuotesAjax');
-	Route::get('readServiceBlock','QuoteController@showService');
-	Route::get('readServices/{id}','QuoteController@readByAjax');
-	Route::post('quote/header','QuoteController@header');
-	//QouteList
-	Route::resource('quotelist','QuoteListController');
-	Route::get('readQuotes','QuoteListController@readByAjax');
-
-	Route::resource('quotedetail','QuoteDetailController');
-	Route::get('newresource/{id}','QuoteDetailController@newresource');
-	Route::get('readMaterial/{id}','QuoteDetailController@readMaterial');
-	Route::get('readEquipment/{id}','QuoteDetailController@readEquipment');
-	Route::get('readWorker/{id}','QuoteDetailController@readWorker');
-	Route::get('getMatPrice/{id}','QuoteDetailController@getMatPrice');
-	Route::get('findMatbyClass/{id}','QuoteDetailController@findMatbyClass');
-	Route::get('findMatbyNone','QuoteDetailController@findMatbyNone');
-	Route::get('findMatbyUOM/{id}','QuoteDetailController@findMatbyUOM');
-	Route::get('compute/{id}','QuoteDetailController@compute');
-
-
-	Route::post('addMatQuote','QuoteDetailController@addMatQuote');
-	Route::post('addEquipQuote','QuoteDetailController@addEquipQuote');
-	Route::post('addWorkerQuote','QuoteDetailController@addWorkerQuote');
-	Route::post('finalquote','QuoteDetailController@finalquote');
-	Route::post('finalquote2','QuoteDetailController@finalquote2');
-	Route::post('quoteadditional','QuoteDetailController@quoteadditional');
-	Route::get('readAdditional/{id}','QuoteDetailController@readAdditional');
-
-
-	Route::get('getQDID','QuoteDetailController@getQDID');
-
-	Route::get('addmaterial/{id}','QuoteDetailController@getaddmaterial');
-	Route::post('addmaterial','QuoteDetailController@postaddmaterial');
-	Route::get('readMaterialAdded/{id}','QuoteDetailController@readByAjax');
-	Route::get('addequipment/{id}','QuoteDetailController@getaddequipment');
-	Route::post('addequipment','QuoteDetailController@postaddequipment');
-	Route::get('addworkers/{id}','QuoteDetailController@getaddworker');
-	Route::post('addworkers','QuoteDetailController@postaddworker');
-	//
-
-	Route::resource('contractadd','ContractController');
-	Route::get('findClientbyNone','ContractController@findClientbyNone');
-	Route::get('findByClient/{id}','ContractController@findByClient');
-
-
-	//Contract List
-	Route::resource('contractlist','ContractListController');
-
-
-	//Billling
-	Route::resource('billing','BillingController');
-	Route::get('readByAjax13','BillingController@readByAjax');
-	Route::get('readByAjax19','BillingController@readByAjax2');
-	Route::post('billing/{id}/storeThis',['as'=>'billing.storeThis','uses'=>'BillingController@storeThis']);
-	Route::get('/billing/collect/{id}/showThis',['as'=>'billing.showThis','uses'=>'BillingController@showThis']);
-	Route::get('/billing/{id}/turnover',['as'=>'billing.turnover','uses'=>'BillingController@turnover']);
-	Route::get('/billing/collect/{id}',['as'=>'collect.show','uses'=>'BillingController@showCollect']);
-
-
-	Route::resource('individualbilling','IndividualBillingController');
-	Route::get('readByAjax29','IndividualBillingController@readByAjax');
-	Route::get('readByAjax30','IndividualBillingController@readByAjax2');
-	Route::post('individualbilling/{id}/storeThis',['as'=>'individualbilling.storeThis','uses'=>'IndividualBillingController@storeThis']);
-
-
-	Route::resource('stockadjustment','StockController');
-	Route::get('readByAjax15','StockController@readByAjax');
-	Route::post('stockadjustment/{id}/storeThis',['as'=>'stockadjustment.storeThis','uses'=>'StockController@storeThis']);
-	Route::post('stockadjustment/{id}/storeThat',['as'=>'stockadjustment.storeThat','uses'=>'StockController@storeThat']);
-
-
-	Route::resource('progressmonitoring','ProgressMonitoringController');
-	Route::get('readByAjax14','ProgressMonitoringController@readByAjax');
-	Route::get('findWorker/{id}','ProgressMonitoringController@findWorker');
-	Route::get('findSpec/{id}','ProgressMonitoringController@findSpec');
-	Route::get('findEquip/{id}','ProgressMonitoringController@findEquip');
-	Route::get('findStock/{id}','ProgressMonitoringController@findStock');
-	Route::get('findWork/{id}','ProgressMonitoringController@findWork');
-	Route::get('findMat/{id}','ProgressMonitoringController@findMat');
-	Route::get('findEqui/{id}','ProgressMonitoringController@findEqui');
-	Route::get('findHistory/{id}','ProgressMonitoringController@findHistory');
-	Route::get('findWorkerbyNone','ProgressMonitoringController@findWorkerbyNone');
-	Route::get('progressmonitoring/{id}/readByAjax2',['as'=>'progressmonitoring.readByAjax2','uses'=>'ProgressMonitoringController@readByAjax2']);
-	Route::post('progressmonitoring/{id}/storeThis',['as'=>'progressmonitoring.storeThis','uses'=>'ProgressMonitoringController@storeThis']);
-	Route::post('progressmonitoring/{id}/storeOA',['as'=>'progressmonitoring.storeOA','uses'=>'ProgressMonitoringController@storeOA']);
-
-	Route::resource('indprogressmonitoring','IndividualProgressMonitoring');
-	Route::get('readByAjax31','IndividualProgressMonitoring@readByAjax');
-	Route::get('ifindWorker/{id}','IndividualProgressMonitoring@findWorker');
-	Route::get('ifindSpec/{id}','IndividualProgressMonitoring@findSpec');
-	Route::get('ifindEquip/{id}','IndividualProgressMonitoring@findEquip');
-	Route::get('ifindStock/{id}','IndividualProgressMonitoring@findStock');
-	Route::get('ifindWork/{id}','IndividualProgressMonitoring@findWork');
-	Route::get('ifindMat/{id}','IndividualProgressMonitoring@findMat');
-	Route::get('ifindEqui/{id}','IndividualProgressMonitoring@findEqui');
-	Route::get('ifindHistory/{id}','IndividualProgressMonitoring@findHistory');
-	Route::get('ifindWorkerbyNone','IndividualProgressMonitoring@findWorkerbyNone');
-	Route::get('indprogressmonitoring/{id}/readByAjax2',['as'=>'indprogressmonitoring.readByAjax2','uses'=>'IndividualProgressMonitoring@readByAjax2']);
-	Route::post('indprogressmonitoring/{id}/storeThis',['as'=>'indprogressmonitoring.storeThis','uses'=>'IndividualProgressMonitoring@storeThis']);
-	Route::get('/indprogressmonitoring/{id}/indturnover',['as'=>'indprogressmonitoring.indturnover','uses'=>'IndividualProgressMonitoring@indturnover']);
-	Route::put('/indprogressmonitoring/{id}/updturnover',['as'=>'indprogressmonitoring.updturnover','uses'=>'IndividualProgressMonitoring@updturnover']);
-
-
-
-
-	Route::resource('delivery','DeliveryController');
-	Route::get('readByAjax16','DeliveryController@readByAjax');
-	Route::get('findDelMat/{id}','DeliveryController@findDelMat');
-	Route::put('delivery/{id}/delete ','DeliveryController@delete');
-	Route::get('findTruck/{id}','DeliveryController@findTruck');
-	Route::get('findMatD/{id}','DeliveryController@findMatD');
-	Route::get('findDel/{id}','DeliveryController@findDel');
-
-	Route::resource('clientqueries','QueriesClientController');
-	Route::get('readByAjax20','QueriesClientController@readByAjax');
-	Route::get('readByAjax21','QueriesClientController@readByAjax2');
-	Route::get('findLocation','QueriesClientController@findLocation');
-	Route::get('findIndLocation','QueriesClientController@findIndLocation');
-	Route::get('readByAjax22/{id}','QueriesClientController@readByAjax3');
-	Route::get('readByAjax33/{id}','QueriesClientController@readByAjax4');
-
-
-	Route::resource('stockqueries','QueriesStockController');
-	Route::get('readByAjax23','QueriesStockController@readByAjax');
-	Route::get('readByAjax24','QueriesStockController@readByAjax2');
-	Route::get('readByAjax25','QueriesStockController@readByAjax3');
-	Route::get('findMate/{id}','QueriesStockController@findMate');
-	Route::get('findStartDate/{id}','QueriesStockController@findStartDate');
-
-	Route::resource('invoicequeries','QueriesInvoiceController');
-	Route::get('readByAjax26','QueriesInvoiceController@readByAjax');
-	Route::get('readByAjax27','QueriesInvoiceController@readByAjax2');
-	Route::get('readByAjax28','QueriesInvoiceController@readByAjax3');
-	Route::get('findClient/{id}','QueriesInvoiceController@findClient');
-	Route::get('findQProj/{id}','QueriesInvoiceController@findQProj');
-	Route::get('findIStartDate/{id}','QueriesInvoiceController@findIStartDate');
-
-	Route::resource('deliveryqueries','QueriesDeliveryController');
-	Route::get('readByAjax34','QueriesDeliveryController@readByAjax');
-	Route::get('findbyProject/{id}','QueriesDeliveryController@findbyProject');
-	Route::get('byPending','QueriesDeliveryController@byPending');
-	Route::get('byFinished','QueriesDeliveryController@byFinished');
-	Route::get('byLocation/{id}','QueriesDeliveryController@byLocation');
-	Route::get('finddelStartDate/{id}','QueriesDeliveryController@finddelStartDate');
-	
-	Route::resource('projectqueries','QueriesProjectController');
-	Route::get('readByAjax35/{id}','QueriesProjectController@readByAjax');
-	Route::get('byPending','QueriesProjectController@byPending');
-	Route::get('byOngoing','QueriesProjectController@byOngoing');
-	Route::get('byTerminated}','QueriesProjectController@byTerminated');
-	Route::get('findPStartDate/{id}','QueriesProjectController@findPStartDate');
-
-
-
-	//User Account
-	Route::resource('userlevel','UserLevelController');
-	Route::get('readByAjax17','UserLevelController@readByAjax');
-	Route::put('userlevel/checkbox/{id}', 'UserLevelController@checkbox');
-
-
-	//Reports
-	Route::resource('pdf','invoicepdfController');
-	Route::post('pdf/{id}/quotation',['as'=>'pdf.quotation','uses'=>'invoicepdfController@quotation']);
-	Route::get('pdf/showind/{id}',['as'=>'pdf.showind','uses'=>'invoicepdfController@showind']);
-	Route::get('pdf/orcomp/{id}',['as'=>'pdf.orcomp','uses'=>'invoicepdfController@orcomp']);
-	Route::get('pdf/orind/{id}',['as'=>'pdf.orind','uses'=>'invoicepdfController@orind']);
-
-	Route::resource('progressreport','ProgressReportController');
-	Route::get('findByCompClient','ProgressReportController@findByCompClient');
-	Route::get('findByIndClient','ProgressReportController@findByIndClient');
-	Route::post('progress_report','ProgressReportController@progress_report');
-
-	Route::resource('deliveryreport','DeliveryReportController');
-	Route::post('delivery_report','DeliveryReportController@delivery_report');
-
-	Route::get('soareport','SOAReportController@index');
-	Route::post('soa','SOAReportController@soa');
-
-	Route::get('collectionreport','CollectionReportController@index');
-	Route::post('overall_collection','CollectionReportController@collection_report');
-
-	Route::get('referencesreport','ReferencesReportController@index');
-	Route::post('references','ReferencesReportController@references');
-	Route::get('findByRepClient/{id}','ReferencesReportController@findByRepClient');
-
-
-
-
-
-
-
-
-});
-
-
-Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
-	Route::get('/createUser',function(){
-		echo 'admin test success';
-	});
+Route::get('/', function () {
+    return view('homepage');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('pm')->group(function(){
+	Route::get('/login','Auth\PMLoginController@showPMLogin')->name('pm.login');
+	Route::post('/login','Auth\PMLoginController@PMlogin')->name('pm.login.submit');
+	Route::get('/','PM\PMController@index')->name('pm.home');
+		//////////////////////////////////////////////
+	//UTILITIES
+	Route::resource('/utilities','PM\UtilitiesController');
+	//companyinfo
+	Route::get('/companyinfo','PM\UtilitiesController@companyinfo')->name('pm.utilities.companyinfo');
+	//smartcounter
+
+	//rate
+	Route::resource('/rate','PM\RateUtilController');
+	Route::put('/rate/checkbox/{id}', 'PM\RateUtilController@checkbox');
+	Route::put('/rate/{id}/delete ','PM\RateUtilController@delete')->name('pm.utilities.rate.del');
+	//miscellaneous
+	Route::resource('/misc','PM\MiscUtilController');
+	Route::put('/misc/checkbox/{id}', 'PM\MiscUtilController@checkbox');
+	Route::put('/misc/{id}/delete ','PM\MiscUtilController@delete')->name('pm.utilities.misc.del');
+	//additional fee
+	Route::resource('/fee','PM\FeeUtilController');
+	Route::put('/fee/checkbox/{id}', 'PM\FeeUtilController@checkbox');
+	Route::put('/fee/{id}/delete ','PM\FeeUtilController@delete')->name('pm.utilities.fee.del');
+	//form of payment
+	Route::resource('/paymentform','PM\PaymentFormUtilController');
+	Route::put('/paymentform/checkbox/{id}', 'PM\PaymentFormUtilController@checkbox');
+	Route::put('/paymentform/{id}/delete ','PM\PaymentFormUtilController@delete')->name('pm.utilities.payment.del');
+	//tax
+	Route::resource('/tax','PM\TaxUtilController');
+	Route::put('/tax/checkbox/{id}', 'PM\TaxUtilController@checkbox');
+	Route::put('/tax/{id}/delete ','PM\TaxUtilController@delete')->name('pm.utilities.tax.del');
+	//retention
+	Route::resource('/retention','PM\RetentionUtilController');
+	Route::put('/retention/checkbox/{id}', 'PM\RetentionUtilController@checkbox');
+	Route::put('/retention/{id}/delete ','PM\RetentionUtilController@delete')->name('pm.utilities.retention.del');
+	//recoupment
+	Route::resource('/recoupment','PM\RecoupmentUtilController');
+	Route::put('/recoupment/checkbox/{id}', 'PM\RecoupmentUtilController@checkbox');
+	Route::put('/recoupment/{id}/delete ','PM\RecoupmentUtilController@delete')->name('pm.utilities.recoupment.del');
+	//mode of payment
+	Route::resource('/paymentmode','PM\PaymentModeUtilController');
+	Route::put('/paymentmode/checkbox/{id}', 'PM\PaymentModeUtilController@checkbox');
+	Route::put('/paymentmode/{id}/delete ','PM\PaymentModeUtilController@delete')->name('pm.utilities.mode.del');
+	////////////////////////////////////////////////////////
+});
+
+Route::prefix('bd')->group(function(){
+	Route::get('/login','Auth\BDLoginController@showBDLogin')->name('bd.login');
+	Route::post('/login','Auth\BDLoginController@BDlogin')->name('bd.login.submit');
+	Route::get('/','BD\BDController@index')->name('bd.home');
+	//////////////////////////////////////////////
+	//UTILITIES
+	Route::resource('/utilities','BD\UtilitiesController');
+	//companyinfo
+	Route::get('/companyinfo','BD\UtilitiesController@companyinfo')->name('bd.utilities.companyinfo');
+	//smartcounter
+	Route::post('/addEmpID','BD\UtilitiesController@storeEmpID');
+	Route::post('/addClientID','BD\UtilitiesController@storeClientID');
+	Route::get('/smartcounter','BD\UtilitiesController@smartcounter')->name('bd.utilities.smartcounter');
+	//rate
+	Route::resource('/rate','BD\RateUtilController');
+	Route::put('/rate/checkbox/{id}', 'BD\RateUtilController@checkbox');
+	Route::put('/rate/{id}/delete ','BD\RateUtilController@delete')->name('bd.utilities.rate.del');
+	//miscellaneous
+	Route::resource('/misc','BD\MiscUtilController');
+	Route::put('/misc/checkbox/{id}', 'BD\MiscUtilController@checkbox');
+	Route::put('/misc/{id}/delete ','BD\MiscUtilController@delete')->name('bd.utilities.misc.del');
+	//additional fee
+	Route::resource('/fee','BD\FeeUtilController');
+	Route::put('/fee/checkbox/{id}', 'BD\FeeUtilController@checkbox');
+	Route::put('/fee/{id}/delete ','BD\FeeUtilController@delete')->name('bd.utilities.fee.del');
+	//form of payment
+	Route::resource('/paymentform','BD\PaymentFormUtilController');
+	Route::put('/paymentform/checkbox/{id}', 'BD\PaymentFormUtilController@checkbox');
+	Route::put('/paymentform/{id}/delete ','BD\PaymentFormUtilController@delete')->name('bd.utilities.payment.del');
+	//tax
+	Route::resource('/tax','BD\TaxUtilController');
+	Route::put('/tax/checkbox/{id}', 'BD\TaxUtilController@checkbox');
+	Route::put('/tax/{id}/delete ','BD\TaxUtilController@delete')->name('bd.utilities.tax.del');
+	//retention
+	Route::resource('/retention','BD\RetentionUtilController');
+	Route::put('/retention/checkbox/{id}', 'BD\RetentionUtilController@checkbox');
+	Route::put('/retention/{id}/delete ','BD\RetentionUtilController@delete')->name('bd.utilities.retention.del');
+	//recoupment
+	Route::resource('/recoupment','BD\RecoupmentUtilController');
+	Route::put('/recoupment/checkbox/{id}', 'BD\RecoupmentUtilController@checkbox');
+	Route::put('/recoupment/{id}/delete ','BD\RecoupmentUtilController@delete')->name('bd.utilities.recoupment.del');
+	//mode of payment
+	Route::resource('/paymentmode','BD\PaymentModeUtilController');
+	Route::put('/paymentmode/checkbox/{id}', 'BD\PaymentModeUtilController@checkbox');
+	Route::put('/paymentmode/{id}/delete ','BD\PaymentModeUtilController@delete')->name('bd.utilities.mode.del');
+	////////////////////////////////////////////////////////
+});
+
+Route::prefix('o')->group(function(){
+	Route::get('/logout','Auth\OLoginController@getLogout')->name('o.logout');
+	Route::get('/login','Auth\OLoginController@showOLogin')->name('o.login');
+	Route::post('/login','Auth\OLoginController@Ologin')->name('o.login.submit');
+	Route::get('/','O\OController@index')->name('o.home');
+	Route::get('/register','Auth\OLoginController@showRegister')->name('o.register');
+	Route::post('/register','Auth\OLoginController@register')->name('o.register.submit');
+
+	//////////////////////////////////////////////
+	//UTILITIES
+	Route::resource('/utilities','O\UtilitiesController');
+	//companyinfo
+	Route::get('/companyinfo','O\UtilitiesController@companyinfo')->name('o.utilities.companyinfo');
+	//smartcounter
+	Route::post('/addEmpID','O\UtilitiesController@storeEmpID');
+	Route::post('/addClientID','O\UtilitiesController@storeClientID');
+	Route::get('/smartcounter','O\UtilitiesController@smartcounter')->name('o.utilities.smartcounter');
+	//rate
+	Route::resource('/rate','O\RateUtilController');
+	Route::put('/rate/checkbox/{id}', 'O\RateUtilController@checkbox');
+	Route::put('/rate/{id}/delete ','O\RateUtilController@delete')->name('o.utilities.rate.del');
+	//miscellaneous
+	Route::resource('/misc','O\MiscUtilController');
+	Route::put('/misc/checkbox/{id}', 'O\MiscUtilController@checkbox');
+	Route::put('/misc/{id}/delete ','O\MiscUtilController@delete')->name('o.utilities.misc.del');
+	//additional fee
+	Route::resource('/fee','O\FeeUtilController');
+	Route::put('/fee/checkbox/{id}', 'O\FeeUtilController@checkbox');
+	Route::put('/fee/{id}/delete ','O\FeeUtilController@delete')->name('o.utilities.fee.del');
+	//form of payment
+	Route::resource('/paymentform','O\PaymentFormUtilController');
+	Route::put('/paymentform/checkbox/{id}', 'O\PaymentFormUtilController@checkbox');
+	Route::put('/paymentform/{id}/delete ','O\PaymentFormUtilController@delete')->name('o.utilities.payment.del');
+	//tax
+	Route::resource('/tax','O\TaxUtilController');
+	Route::put('/tax/checkbox/{id}', 'O\TaxUtilController@checkbox');
+	Route::put('/tax/{id}/delete ','O\TaxUtilController@delete')->name('o.utilities.tax.del');
+	//retention
+	Route::resource('/retention','O\RetentionUtilController');
+	Route::put('/retention/checkbox/{id}', 'O\RetentionUtilController@checkbox');
+	Route::put('/retention/{id}/delete ','O\RetentionUtilController@delete')->name('o.utilities.retention.del');
+	//recoupment
+	Route::resource('/recoupment','O\RecoupmentUtilController');
+	Route::put('/recoupment/checkbox/{id}', 'O\RecoupmentUtilController@checkbox');
+	Route::put('/recoupment/{id}/delete ','O\RecoupmentUtilController@delete')->name('o.utilities.recoupment.del');
+	//mode of payment
+	Route::resource('/paymentmode','O\PaymentModeUtilController');
+	Route::put('/paymentmode/checkbox/{id}', 'O\PaymentModeUtilController@checkbox');
+	Route::put('/paymentmode/{id}/delete ','O\PaymentModeUtilController@delete')->name('o.utilities.mode.del');
+	////////////////////////////////////////////////////////
+	//MAINTENANCE
+	//Specialize
+	Route::resource('/specialization','O\SpecializationController');
+	Route::get('/readByAjax7','O\SpecializationController@readByAjax');
+	Route::put('/specialization/checkbox/{id}', 'O\SpecializationController@checkbox');
+	Route::put('/specialization/{id}/delete ','O\SpecializationController@delete');
+	//Worker
+	Route::resource('/worker','O\EmployeeController');
+	Route::get('/worker/{id}/editSpec','O\EmployeeController@editSpec');
+	Route::resource('/empspec','O\EmpSpecController');
+	Route::get('/readByAjax8','O\EmployeeController@readByAjax');
+	Route::put('/worker/checkbox/{id}', 'O\EmployeeController@checkbox');
+	Route::put('/worker/{id}/delete ','O\EmployeeController@delete');
+	//Add Worker
+	Route::resource('/addworker','O\AddEmployeeController');
+	Route::resource('/workerspec','O\EmpSpecController');
+	//Group UOM
+	Route::resource('/groupuomeasure','O\GroupUOMController');
+	Route::get('/readByAjax10','O\GroupUOMController@readByAjax');
+	Route::put('/groupuomeasure/checkbox/{id}', 'O\GroupUOMController@checkbox');
+	Route::put('/groupuomeasure/{id}/delete ','O\GroupUOMController@delete');
+	//Detail UOM
+	Route::resource('/detailuomeasure','O\DetailUOMController');
+	Route::get('/readByAjax11','O\DetailUOMController@readByAjax');
+	Route::put('/detailuomeasure/checkbox/{id}', 'O\DetailUOMController@checkbox');
+	Route::put('/detailuomeasure/{id}/delete ','O\DetailUOMController@delete');
+	//Material Type
+	Route::resource('/materialtype','O\MaterialTypeController');
+	Route::get('/readByAjax9','O\MaterialTypeController@readByAjax');
+	Route::put('/materialtype/checkbox/{id}', 'O\MaterialTypeController@checkbox');
+	Route::put('/materialtype/{id}/delete ','O\MaterialTypeController@delete');
+	//Material Class
+	Route::resource('/materialclass','O\MaterialClassController');
+	Route::get('/readByAjax','O\MaterialClassController@readByAjax');
+	Route::put('/materialclass/checkbox/{id}', 'O\MaterialClassController@checkbox');
+	Route::put('/materialclass/{id}/delete ','O\MaterialClassController@delete');
+	//Material
+	Route::resource('/material','O\MaterialController');
+	Route::get('/readByAjax2','O\MaterialController@readByAjax');
+	Route::put('/material/checkbox//{id}', 'O\MaterialController@checkbox');
+	Route::put('/material/{id}/delete ','O\MaterialController@delete');
+	Route::get('/getMatClass/{id}','O\MaterialController@getMatClass');
+	Route::get('/getMatUOM/{id}','O\MaterialController@getMatUOM');
+	Route::get('/getMatSymbol/{id}','O\MaterialController@getMatSymbol');
+	//EquipmentType
+	Route::resource('/equiptype','O\EquipTypeController');
+	Route::get('/readByAjax3','O\EquipTypeController@readByAjax');
+	Route::put('/equiptype/checkbox/{id}', 'O\EquipTypeController@checkbox');
+	Route::put('/equiptype/{id}/delete ','O\EquipTypeController@delete');
+	//Equipment
+	Route::resource('/equipment','O\EquipmentController');
+	Route::get('/readByAjax4','O\EquipmentController@readByAjax');
+	Route::put('/equipment/checkbox/{id}', 'O\EquipmentController@checkbox');
+	Route::put('/equipment/{id}/delete ','O\EquipmentController@delete');
+	//Services Offered
+	Route::resource('/serviceOff','O\ServicesOfferedController');
+	Route::get('/readByAjax5','O\ServicesOfferedController@readByAjax');
+	Route::put('/serviceOff/checkbox/{id}', 'O\ServicesOfferedController@checkbox');
+	Route::put('/serviceOff/{id}/delete ','O\ServicesOfferedController@delete');
+	Route::get('/readMaterial','O\ServicesOfferedController@readMaterial')->name('o.readMat');
+	Route::get('/readEquipment','O\ServicesOfferedController@readEquipment')->name('o.readEquip');
+	Route::get('/readWorker','O\ServicesOfferedController@readWorker')->name('o.readWorker');
+	Route::get('/serviceOff/findMatbyClass/{id}','O\ServicesOfferedController@findMatbyClass');
+	Route::get('/serviceOff/findMatbyNone','O\ServicesOfferedController@findMatbyNone');
+	Route::get('/serviceOff/findMatbyUOM/{id}','O\ServicesOfferedController@findMatbyUOM');
+
+	Route::get('/serviceOff/findRPD/{id}','O\ServicesOfferedController@findRPD');
+
+	Route::get('/serviceOff/findEquipbyNone','O\ServicesOfferedController@findEquipbyNone');
+	Route::get('/serviceOff/findEquipbyType/{id}','O\ServicesOfferedController@findEquipbyType');
+
+	Route::get('/serviceOff/getMatPrice/{id}','O\ServicesOfferedController@getMatPrice');
+	Route::get('/serviceOff/getEPrice/{id}','O\ServicesOfferedController@getEPrice');
+
+	// Route::get('/serviceOff/findWorkerRate/{id}','O\ServicesOfferedController@findWorkerRate');
+	//Bank
+	Route::resource('/bank','O\BankController');
+	Route::get('/readByAjax12','O\BankController@readByAjax');
+	Route::put('/bank/checkbox/{id}', 'O\BankController@checkbox');
+	Route::put('/bank/{id}/delete ','O\BankController@delete');
+	//Delivery Trucks
+	Route::resource('/deliverytruck','O\DeliveryTruckController');
+	Route::get('/readByAjax6','O\DeliveryTruckController@readByAjax');
+	Route::put('/deliverytruck/checkbox/{id}', 'O\DeliveryTruckController@checkbox');
+	Route::put('/deliverytruck/{id}/delete ','O\DeliveryTruckController@delete');
+	////////////////////////////////////////////////////////
+
+});
+

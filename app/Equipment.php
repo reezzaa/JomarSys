@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Equipment extends Model
 {
      protected $fillable = [
-      'strEquipName',
-      'intTypeID',
-      'strEquipModel',
-      'dblEquipWeight',
+      'EquipName',
+      'TypeID',
+      'EquipLeaser',
+      'EquipKey',
+      'EquipPrice',
       'todelete',
       'status',
     ];
     public $timestamps = false;
-    protected $primaryKey = 'intEquipID';
     protected $table = 'tblEquipment';
 }

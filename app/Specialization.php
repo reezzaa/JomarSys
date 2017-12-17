@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Specialization extends Model
 {
       protected $fillable = [
-      'strSpecDesc',
+      'SpecDesc',
+      'rpd',
       'todelete',
       'status',
     ];
     public $timestamps =false;
-    protected $primaryKey = 'intSpecID';
-    protected $table = 'tblSpecialization';
+    protected $table = 'tblspecialization';
 
     public function categories()
     {

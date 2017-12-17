@@ -33,7 +33,7 @@ var FormsValidation = function() {
                         required: true,
                         minlength: 3
                     },
-                    val_email: {
+                    email: {
                         required: true,
                         email: true
                     },
@@ -75,118 +75,25 @@ var FormsValidation = function() {
                     val_terms: {
                         required: true
                     },
-                    /////////////TRANSACTIONS
-                    //CLIENT
-                    strClientName: {
-                        required: true
-                    },
-                    strClientContactPerson: {
-                        required: true
-                    },
-                    strClientPosition: {
-                        required: true
-                    },
-                    strClientEmail: {
-                        required: true,
-                        email: true
-                    },
-                    strClientTIN: {
-                        required: true
-                    },
-                    strClientContactNo: {
-                        required: true
-                    },
-                    strClientCity: {
-                        required: true
-                    },
-                    strClientProv: {
-                        required: true
-                    },
-
-                    //CONTRACT
-                    intContClientID: {
-                        required: true
-                    },
-                    strContractNo: {
-                        required: true
-                    },
-                    datStart: {
-                        required: true
-                    },
-                    datEnd: {
-                        required: true
-                    },
-                    datQStart: {
-                        required: true
-                    },
-                    datQEnd: {
-                        required: true
-                    },
-                    strFormPayment: {
-                        required: true
-                    },
-                    strTermPayment: {
-                        required: true
-                    },
-                    dblContractAmount: {
-                        required: true
-                    },
-
-                    firstname:{
-                        required: true
-                    },
-                    lastname:{
-                        required: true
-                    },
-                    contactnum:{
-                        required: true,
-                        minlength:11
-                    },
-                    streetcity:{
-                        required: true
-                    },
-                    streetprov:{
-                        required: true
-                    },
-
-                    //Delivery
-                    proj:{
-                        required: true
-                    },
-                    worker:{
-                        required: true
-                    },
-                    delidate:{
-                        required: true
-                    },
-                    deladdress:{
-                        required: true
-                    },
-                    City:{
-                        required: true
-                    },
-                    Province:{
-                        required: true
-                    },
-
-                    // billing
-                    conumber:{
-                        required: true
-                    },
-                    ornumber:{
-                        required: true,
-                        unique:true
-                    },
 
 
+                    fname:{
+                        required: true
+                    },
+                    lname:{
+                        required: true
+                    },
+                    email:{
+                        required: true
+                    },
 
                 },
                 messages: {
                     val_username: {
-                        required: 'Please enter a username',
+                        required: 'User name field is required',
                         minlength: 'Your username must consist of at least 3 characters'
                     },
-                    val_email: 'Please enter a valid email address',
+                    email: 'Please enter a valid email address',
                     val_password: {
                         required: 'Please provide a password',
                         minlength: 'Your password must be at least 5 characters long'
@@ -204,77 +111,12 @@ var FormsValidation = function() {
                     val_number: 'Please enter a number!',
                     val_range: 'Please enter a number between 1 and 100!',
                     val_terms: 'You must agree to the service terms!',
-                    //////////TRANSACTIONS
-                    //CLIENT
-                    strClientName: 'Please enter a Client Name',
-                    strClientEmail: 'Please enter a valid email address',
+
+                    fname: 'Please enter your first name',
+                    lname: 'Please enter your last name',
                     
-                    proj: 'Project Selection field is required!',
-                    worker: 'Person-in-Charge field is required!',
-                    delidate: 'Delivery Date field is required!',
-                    deladdress: 'Address field is required!',
-                    City: 'City field is required!',
-                    Province: 'Province field is required!',
-
-                    conumber: 'Contract Order field is required!',
-                    ornumber: {
-                        required:'Official Receipt field is required!',
-                        unique:'Official Receipt exists!'
-                    }
-
 
                     
-                }
-            });
-
-            $('#form-progress').validate({
-                errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
-                errorElement: 'div',
-                errorPlacement: function(error, e) {
-                    e.parents('.form-group > div').append(error);
-                },
-                highlight: function(e) {
-                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
-                    $(e).closest('.help-block').remove();
-                },
-                success: function(e) {
-                    // You can use the following if you would like to highlight with green color the input after successful validation!
-                    e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
-                    e.closest('.help-block').remove();
-                },
-                rules: {
-                    serv: {
-                        required: true
-                    },
-                    actdesc: {
-                        required: true,
-                        minlength: 3
-                    },
-                   datStart: {
-                        required: true
-                    },
-                    datEnd: {
-                        required:true
-                    },
-                    spec: {
-                        required:false
-                    },
-                    workers: {
-                        required:true
-                    },
-                    equip: {
-                        required:false
-                    },
-                },
-                messages: {
-                   serv:" Service Name field is required!",
-                   actdesc:{
-                     required: " Activity field is required!",
-                     minlength: " Activity field must be at least 3 characters long",
-                   },
-                   datStart: "Target Start Date field is required!",
-                   datEnd: "Target End Date field is required!",
-                   workers: "This field is required!",
                 }
             });
 

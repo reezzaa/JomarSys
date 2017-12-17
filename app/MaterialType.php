@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class MaterialType extends Model
 {
     protected $fillable = [
-      'strMatTypeName',
+      'MatTypeName',
       'todelete',
       'status',
     ];
     public $timestamps = false;
-    protected $primaryKey = 'intMatTypeID';
     protected $table = 'tblMaterialType';
 }
