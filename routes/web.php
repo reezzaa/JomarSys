@@ -25,43 +25,45 @@ Route::prefix('pm')->group(function(){
 	Route::get('/','PM\PMController@index')->name('pm.home');
 		//////////////////////////////////////////////
 	//UTILITIES
-	Route::resource('/utilities','PM\UtilitiesController');
+	Route::resource('/pmutilities','PM\UtilitiesController');
 	//companyinfo
 	Route::get('/companyinfo','PM\UtilitiesController@companyinfo')->name('pm.utilities.companyinfo');
 	//smartcounter
-
+	Route::post('/addEmpID','PM\UtilitiesController@storeEmpID');
+	Route::post('/addClientID','PM\UtilitiesController@storeClientID');
+	Route::post('/addContractID','PM\UtilitiesController@storeContractID');
+	Route::post('/addInvoiceID','PM\UtilitiesController@storeInvoiceID');
+	Route::post('/addOrID','PM\UtilitiesController@storeOrID');
+	Route::get('/smartcounter','PM\UtilitiesController@smartcounter')->name('pm.utilities.smartcounter');
 	//rate
-	Route::resource('/rate','PM\RateUtilController');
-	Route::put('/rate/checkbox/{id}', 'PM\RateUtilController@checkbox');
-	Route::put('/rate/{id}/delete ','PM\RateUtilController@delete')->name('pm.utilities.rate.del');
+	Route::resource('/pmrate','PM\RateUtilController');
+	Route::put('/pmrate/checkbox/{id}', 'PM\RateUtilController@checkbox');
+	Route::put('/pmrate/{id}/delete ','PM\RateUtilController@delete')->name('pm.utilities.rate.del');
 	//miscellaneous
-	Route::resource('/misc','PM\MiscUtilController');
-	Route::put('/misc/checkbox/{id}', 'PM\MiscUtilController@checkbox');
-	Route::put('/misc/{id}/delete ','PM\MiscUtilController@delete')->name('pm.utilities.misc.del');
+	Route::resource('/pmmisc','PM\MiscUtilController');
+	Route::put('/pmmisc/checkbox/{id}', 'PM\MiscUtilController@checkbox');
+	Route::put('/pmmisc/{id}/delete ','PM\MiscUtilController@delete')->name('pm.utilities.misc.del');
 	//additional fee
-	Route::resource('/fee','PM\FeeUtilController');
-	Route::put('/fee/checkbox/{id}', 'PM\FeeUtilController@checkbox');
-	Route::put('/fee/{id}/delete ','PM\FeeUtilController@delete')->name('pm.utilities.fee.del');
-	//form of payment
-	Route::resource('/paymentform','PM\PaymentFormUtilController');
-	Route::put('/paymentform/checkbox/{id}', 'PM\PaymentFormUtilController@checkbox');
-	Route::put('/paymentform/{id}/delete ','PM\PaymentFormUtilController@delete')->name('pm.utilities.payment.del');
+	Route::resource('/pmfee','PM\FeeUtilController');
+	Route::put('/pmfee/checkbox/{id}', 'PM\FeeUtilController@checkbox');
+	Route::put('/pmfee/{id}/delete ','PM\FeeUtilController@delete')->name('pm.utilities.fee.del');
+	
 	//tax
-	Route::resource('/tax','PM\TaxUtilController');
-	Route::put('/tax/checkbox/{id}', 'PM\TaxUtilController@checkbox');
-	Route::put('/tax/{id}/delete ','PM\TaxUtilController@delete')->name('pm.utilities.tax.del');
+	Route::resource('/pmtax','PM\TaxUtilController');
+	Route::put('/pmtax/checkbox/{id}', 'PM\TaxUtilController@checkbox');
+	Route::put('/pmtax/{id}/delete ','PM\TaxUtilController@delete')->name('pm.utilities.tax.del');
 	//retention
-	Route::resource('/retention','PM\RetentionUtilController');
-	Route::put('/retention/checkbox/{id}', 'PM\RetentionUtilController@checkbox');
-	Route::put('/retention/{id}/delete ','PM\RetentionUtilController@delete')->name('pm.utilities.retention.del');
+	Route::resource('/pmretention','PM\RetentionUtilController');
+	Route::put('/pmretention/checkbox/{id}', 'PM\RetentionUtilController@checkbox');
+	Route::put('/pmretention/{id}/delete ','PM\RetentionUtilController@delete')->name('pm.utilities.retention.del');
 	//recoupment
-	Route::resource('/recoupment','PM\RecoupmentUtilController');
-	Route::put('/recoupment/checkbox/{id}', 'PM\RecoupmentUtilController@checkbox');
-	Route::put('/recoupment/{id}/delete ','PM\RecoupmentUtilController@delete')->name('pm.utilities.recoupment.del');
+	Route::resource('/pmrecoupment','PM\RecoupmentUtilController');
+	Route::put('/pmrecoupment/checkbox/{id}', 'PM\RecoupmentUtilController@checkbox');
+	Route::put('/pmrecoupment/{id}/delete ','PM\RecoupmentUtilController@delete')->name('pm.utilities.recoupment.del');
 	//mode of payment
-	Route::resource('/paymentmode','PM\PaymentModeUtilController');
-	Route::put('/paymentmode/checkbox/{id}', 'PM\PaymentModeUtilController@checkbox');
-	Route::put('/paymentmode/{id}/delete ','PM\PaymentModeUtilController@delete')->name('pm.utilities.mode.del');
+	Route::resource('/pmpaymentmode','PM\PaymentModeUtilController');
+	Route::put('/pmpaymentmode/checkbox/{id}', 'PM\PaymentModeUtilController@checkbox');
+	Route::put('/pmpaymentmode/{id}/delete ','PM\PaymentModeUtilController@delete')->name('pm.utilities.mode.del');
 	////////////////////////////////////////////////////////
 });
 
@@ -71,45 +73,45 @@ Route::prefix('bd')->group(function(){
 	Route::get('/','BD\BDController@index')->name('bd.home');
 	//////////////////////////////////////////////
 	//UTILITIES
-	Route::resource('/utilities','BD\UtilitiesController');
+	Route::resource('/bdutilities','BD\UtilitiesController');
+
 	//companyinfo
 	Route::get('/companyinfo','BD\UtilitiesController@companyinfo')->name('bd.utilities.companyinfo');
 	//smartcounter
 	Route::post('/addEmpID','BD\UtilitiesController@storeEmpID');
 	Route::post('/addClientID','BD\UtilitiesController@storeClientID');
+	Route::post('/addContractID','BD\UtilitiesController@storeContractID');
+	Route::post('/addInvoiceID','BD\UtilitiesController@storeInvoiceID');
+	Route::post('/addOrID','BD\UtilitiesController@storeOrID');
 	Route::get('/smartcounter','BD\UtilitiesController@smartcounter')->name('bd.utilities.smartcounter');
 	//rate
-	Route::resource('/rate','BD\RateUtilController');
-	Route::put('/rate/checkbox/{id}', 'BD\RateUtilController@checkbox');
-	Route::put('/rate/{id}/delete ','BD\RateUtilController@delete')->name('bd.utilities.rate.del');
+	Route::resource('/bdrate','BD\RateUtilController');
+	Route::put('/bdrate/checkbox/{id}', 'BD\RateUtilController@checkbox');
+	Route::put('/bdrate/{id}/delete ','BD\RateUtilController@delete')->name('bd.utilities.rate.del');
 	//miscellaneous
-	Route::resource('/misc','BD\MiscUtilController');
-	Route::put('/misc/checkbox/{id}', 'BD\MiscUtilController@checkbox');
-	Route::put('/misc/{id}/delete ','BD\MiscUtilController@delete')->name('bd.utilities.misc.del');
+	Route::resource('/bdmisc','BD\MiscUtilController');
+	Route::put('/bdmisc/checkbox/{id}', 'BD\MiscUtilController@checkbox');
+	Route::put('/bdmisc/{id}/delete ','BD\MiscUtilController@delete')->name('bd.utilities.misc.del');
 	//additional fee
-	Route::resource('/fee','BD\FeeUtilController');
-	Route::put('/fee/checkbox/{id}', 'BD\FeeUtilController@checkbox');
-	Route::put('/fee/{id}/delete ','BD\FeeUtilController@delete')->name('bd.utilities.fee.del');
-	//form of payment
-	Route::resource('/paymentform','BD\PaymentFormUtilController');
-	Route::put('/paymentform/checkbox/{id}', 'BD\PaymentFormUtilController@checkbox');
-	Route::put('/paymentform/{id}/delete ','BD\PaymentFormUtilController@delete')->name('bd.utilities.payment.del');
+	Route::resource('/bdfee','BD\FeeUtilController');
+	Route::put('/bdfee/checkbox/{id}', 'BD\FeeUtilController@checkbox');
+	Route::put('/bdfee/{id}/delete ','BD\FeeUtilController@delete')->name('bd.utilities.fee.del');
 	//tax
-	Route::resource('/tax','BD\TaxUtilController');
-	Route::put('/tax/checkbox/{id}', 'BD\TaxUtilController@checkbox');
-	Route::put('/tax/{id}/delete ','BD\TaxUtilController@delete')->name('bd.utilities.tax.del');
+	Route::resource('/bdtax','BD\TaxUtilController');
+	Route::put('/bdtax/checkbox/{id}', 'BD\TaxUtilController@checkbox');
+	Route::put('/bdtax/{id}/delete ','BD\TaxUtilController@delete')->name('bd.utilities.tax.del');
 	//retention
-	Route::resource('/retention','BD\RetentionUtilController');
-	Route::put('/retention/checkbox/{id}', 'BD\RetentionUtilController@checkbox');
-	Route::put('/retention/{id}/delete ','BD\RetentionUtilController@delete')->name('bd.utilities.retention.del');
+	Route::resource('/bdretention','BD\RetentionUtilController');
+	Route::put('/bdretention/checkbox/{id}', 'BD\RetentionUtilController@checkbox');
+	Route::put('/bdretention/{id}/delete ','BD\RetentionUtilController@delete')->name('bd.utilities.retention.del');
 	//recoupment
-	Route::resource('/recoupment','BD\RecoupmentUtilController');
-	Route::put('/recoupment/checkbox/{id}', 'BD\RecoupmentUtilController@checkbox');
-	Route::put('/recoupment/{id}/delete ','BD\RecoupmentUtilController@delete')->name('bd.utilities.recoupment.del');
+	Route::resource('/bdrecoupment','BD\RecoupmentUtilController');
+	Route::put('/bdrecoupment/checkbox/{id}', 'BD\RecoupmentUtilController@checkbox');
+	Route::put('/bdrecoupment/{id}/delete ','BD\RecoupmentUtilController@delete')->name('bd.utilities.recoupment.del');
 	//mode of payment
-	Route::resource('/paymentmode','BD\PaymentModeUtilController');
-	Route::put('/paymentmode/checkbox/{id}', 'BD\PaymentModeUtilController@checkbox');
-	Route::put('/paymentmode/{id}/delete ','BD\PaymentModeUtilController@delete')->name('bd.utilities.mode.del');
+	Route::resource('/bdpaymentmode','BD\PaymentModeUtilController');
+	Route::put('/bdpaymentmode/checkbox/{id}', 'BD\PaymentModeUtilController@checkbox');
+	Route::put('/bdpaymentmode/{id}/delete ','BD\PaymentModeUtilController@delete')->name('bd.utilities.mode.del');
 	////////////////////////////////////////////////////////
 });
 
@@ -129,6 +131,9 @@ Route::prefix('o')->group(function(){
 	//smartcounter
 	Route::post('/addEmpID','O\UtilitiesController@storeEmpID');
 	Route::post('/addClientID','O\UtilitiesController@storeClientID');
+	Route::post('/addContractID','O\UtilitiesController@storeContractID');
+	Route::post('/addInvoiceID','O\UtilitiesController@storeInvoiceID');
+	Route::post('/addOrID','O\UtilitiesController@storeOrID');
 	Route::get('/smartcounter','O\UtilitiesController@smartcounter')->name('o.utilities.smartcounter');
 	//rate
 	Route::resource('/rate','O\RateUtilController');
@@ -142,10 +147,6 @@ Route::prefix('o')->group(function(){
 	Route::resource('/fee','O\FeeUtilController');
 	Route::put('/fee/checkbox/{id}', 'O\FeeUtilController@checkbox');
 	Route::put('/fee/{id}/delete ','O\FeeUtilController@delete')->name('o.utilities.fee.del');
-	//form of payment
-	Route::resource('/paymentform','O\PaymentFormUtilController');
-	Route::put('/paymentform/checkbox/{id}', 'O\PaymentFormUtilController@checkbox');
-	Route::put('/paymentform/{id}/delete ','O\PaymentFormUtilController@delete')->name('o.utilities.payment.del');
 	//tax
 	Route::resource('/tax','O\TaxUtilController');
 	Route::put('/tax/checkbox/{id}', 'O\TaxUtilController@checkbox');
@@ -236,6 +237,7 @@ Route::prefix('o')->group(function(){
 
 	Route::get('/serviceOff/getMatPrice/{id}','O\ServicesOfferedController@getMatPrice');
 	Route::get('/serviceOff/getEPrice/{id}','O\ServicesOfferedController@getEPrice');
+	Route::get('/serviceOff/findFee/{id}','O\ServicesOfferedController@findFee');
 
 	// Route::get('/serviceOff/findWorkerRate/{id}','O\ServicesOfferedController@findWorkerRate');
 	//Bank
@@ -243,12 +245,17 @@ Route::prefix('o')->group(function(){
 	Route::get('/readByAjax12','O\BankController@readByAjax');
 	Route::put('/bank/checkbox/{id}', 'O\BankController@checkbox');
 	Route::put('/bank/{id}/delete ','O\BankController@delete');
-	//Delivery Trucks
-	Route::resource('/deliverytruck','O\DeliveryTruckController');
-	Route::get('/readByAjax6','O\DeliveryTruckController@readByAjax');
-	Route::put('/deliverytruck/checkbox/{id}', 'O\DeliveryTruckController@checkbox');
-	Route::put('/deliverytruck/{id}/delete ','O\DeliveryTruckController@delete');
+	// //Delivery Trucks
+	// Route::resource('/deliverytruck','O\DeliveryTruckController');
+	// Route::get('/readByAjax6','O\DeliveryTruckController@readByAjax');
+	// Route::put('/deliverytruck/checkbox/{id}', 'O\DeliveryTruckController@checkbox');
+	// Route::put('/deliverytruck/{id}/delete ','O\DeliveryTruckController@delete');
 	////////////////////////////////////////////////////////
+
+	Route::resource('/stockadjustment','O\StockController');
+	Route::get('/readByAjax15','O\StockController@readByAjax');
+	Route::post('/stockadjustment/{id}/storeThis',['as'=>'stockadjustment.storeThis','uses'=>'O\StockController@storeThis']);
+	Route::post('/stockadjustment/{id}/storeThat',['as'=>'stockadjustment.storeThat','uses'=>'O\StockController@storeThat']);
 
 });
 

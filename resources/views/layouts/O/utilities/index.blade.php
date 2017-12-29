@@ -106,27 +106,7 @@
           NProgress.done();
          ///////////////////////////////////////////
     };
-    function showpaymentform()
-    {
-      /////////////////stop top loading//////////
-      NProgress.start();
-      ///////////////////////////////////////////
-        $.ajax({
-          type : 'get',
-          url  : "{{ route('paymentform.index') }}",
-          dataType : 'html',
-          success:function(data)
-          {
-              $('.table-responsive').html(data);
-
-              // $('[data-toggle="tooltip"]').tooltip();
-              $('#title').html('<strong>Form of Payment</strong>');
-          }
-        })
-         /////////////////stop top loading//////////
-          NProgress.done();
-         ///////////////////////////////////////////
-    };
+   
     function showtax()
     {
       /////////////////stop top loading//////////
@@ -313,9 +293,6 @@
               </li>
               <li>
                 <a type="button" onclick="showpaymentmode()"><strong>Mode of Payment</strong></a>
-              </li>
-              <li>
-                <a type="button" onclick="showpaymentform()"><strong>Form of Payment</strong></a>
               </li>
               <li>
                 <a type="button" onclick="showtax()"><strong>Tax</strong></a>

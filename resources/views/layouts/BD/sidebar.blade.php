@@ -7,34 +7,52 @@
          <span class="sidebar-header-title">Default Settings</span>
      </li>
     <li >
-        <a href="{{ route('utilities.index') }}"><i class="fa fa-cogs sidebar-nav-icon"></i>Utilities</a>
+        <a href="{{ route('bdutilities.index') }}"><i class="fa fa-cogs sidebar-nav-icon"></i>Utilities</a>
     </li>
     <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="gi gi-settings"></i></a></span>
          <span class="sidebar-header-title">Transaction</span>
      </li>
+     <li>
+                <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i>
+                <i class="gi gi-user sidebar-nav-icon"></i>Client</a>
+                <ul>
+                    <li>
+                        <a href="#" ><i class="fa fa-angle-left sidebar-nav-icon"></i>List of Clients</a>
+                    </li>
+                </ul>
+            </li>
     <li >
-        <a href=""><i class="gi gi-sort sidebar-nav-icon"></i>Quotation</a>
+        <a href=""><i class="gi gi-sort sidebar-nav-icon"></i>Billing </a>
     </li>
-    <li class="sidebar-header">
+    <li >
+        <a href=""><i class="gi gi-sort sidebar-nav-icon"></i>Collection </a>
+    </li>
+   <!--  <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="hi hi-list"></i></a></span>
          <span class="sidebar-header-title">Lists</span>
      </li>
     <li >
         <a href=""><i class="fa fa-cog sidebar-nav-icon"></i>Client List</a>
-    </li>
+    </li> -->
     <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="hi hi-tasks"></i></a></span>
          <span class="sidebar-header-title">Queries & Reports</span>
      </li>
-    <li >
-        <a href=""><i class="fa fa-cog sidebar-nav-icon"></i>Sample</a>
+    <li>
+        <a href=""><i class="fa fa-files-o sidebar-nav-icon"></i>Statement of Accounts</a>
+    </li>
+     <li>
+        <a href=""><i class="fa fa-files-o sidebar-nav-icon"></i>References of Billing</a>
+    </li>
+    <li>
+       <a href=""><i class="fa fa-files-o sidebar-nav-icon"></i>Overall Collection</a>
     </li>
     <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="fa fa-child"></i></a></span>
          <span class="sidebar-header-title">User Account</span>
      </li>
     <li >
-        <a href=""><i class="fa fa-cog sidebar-nav-icon"></i>Accessibility</a>
+        <a href=""><i class="fa fa-cog sidebar-nav-icon"></i>Manage Accounts</a>
     </li>
 </ul>

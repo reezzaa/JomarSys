@@ -14,11 +14,15 @@ use App\DetailUOM;
 use App\Equipment;
 use App\EquipType;
 use App\Specialization;
+use App\Fee;
+use App\ServMFee;
+use App\ServWFee;
 use DB;
+use App\ServTotal;
 use App\ServWorker;
 use App\ServMaterial;
 use App\ServEquipment;
-use App\ServTotal;
+use App\ServTask;
 use Carbon\carbon;
 class ServicesOfferedController extends Controller
 {
@@ -36,10 +40,12 @@ class ServicesOfferedController extends Controller
 
     public function readByAjax()
     {
-    	 $serve = ServicesOffered::join('tblServTotal','tblServTotal.ServID','tblServicesOffered.id')
-        ->select('tblServicesOffered.*','tblServTotal.total')
-        ->where('todelete','=',1)
+        $serve = ServicesOffered::join('tblservtotal','tblservtotal.ServID','tblServicesOffered.id')
+        ->select('tblServicesOffered.*','tblservtotal.total')
+        ->where('tblServicesOffered.todelete',1)
         ->get();
+
+        // dd($serve);
         foreach ($serve as $key ) {
              $key->total=number_format($key->total,2);
                 
@@ -50,44 +56,52 @@ class ServicesOfferedController extends Controller
 
     public function store(Request $request)
     {
-        // $serveAdd = ServicesOffered::where('strServiceOffName', '=', $request->strServiceOffName )
-        //     ->where('todelete','=',1)
-        //     ->get();
-        // if($serveAdd->count() == 0)
-        // {
-        //     ServicesOffered::insert(['strServiceOffName'=>$request->strServiceOffName,
-        //         'todelete'=>1,
-        //         'status'=>1
-        //         ]);
-        //     return Response($serveAdd);
-        // }
         $i='';
         $test='';
-
+        $wtest='';
         $getTotalRPD='';
         $getTotalMat='';
         $getTotalEquip='';
-
+        $initialRPD='';
+        $initialFee='';
+        $getWorkFee='';
+        $getMatFee='';
+        $totalFee='';
+        
         $servOff = new ServicesOffered();
-        // $servOff->id = 1;
         $servOff->ServiceOffName = $request->servname;
         $servOff->duration = $request->duration;
-        $servOff->unit = $request->unit;
-        $servOff->ServiceDesc = $request->servdesc;
+        $servOff->remarks = $request->servdesc;
         $servOff->status = 1;
         $servOff->todelete = 1;
         $servOff->save();
 
         for($i = 0;$i<count($request->worker);$i++)
         {
-            $test = new ServWorker();
-            $test->ServID = $servOff->id;
-            $test->SpecID = $request->worker[$i];
-            $test->quantity = $request->workerqty[$i];
-            $test->todelete = 1;
-            $test->save();
+            $wtest = new ServWorker();
+            $wtest->ServID = $servOff->id;
+            $wtest->SpecID = $request->worker[$i];
+            $wtest->quantity = $request->workerqty[$i];
+            $wtest->todelete = 1;
+            $wtest->save();
 
-            $getTotalRPD += $request->rpd[$i]*$request->workerqty[$i];
+            $initialRPD = $request->workerqty[$i]*$request->rpd[$i];
+
+            $initialFee = ($initialRPD * $request->workfeeval)/100;
+
+            if($initialFee!=null)
+            {
+
+            $fee = new ServWFee();
+            $fee->ServWID = $wtest->id;
+            $fee->FeeID = $request->addworkfee;
+            $fee->amount = $initialFee;
+            $fee->save();
+            $getWorkFee += $initialFee;
+
+            }
+            $getTotalRPD += $initialRPD;
+
         }
         for($i = 0;$i<count($request->material);$i++)
         {
@@ -98,8 +112,10 @@ class ServicesOfferedController extends Controller
             $test->todelete = 1;
             $test->save();
 
-            $getTotalMat += $request->cost[$i];
+            $getTotalMat+= $request->materialqty[$i]*$request->cost[$i];
+
         }
+        $getMatFee = ($getTotalMat * $request->matfeeval)/100;
         for($i = 0;$i<count($request->equipname);$i++)
         {
             $test = new ServEquipment();
@@ -108,14 +124,37 @@ class ServicesOfferedController extends Controller
             $test->todelete = 1;
             $test->save();
 
-            $getTotalEquip += $request->equipprice[$i];
+            $getTotalEquip += $request->equiprice[$i];
 
         }
+        for($i = 0;$i<count($request->servtask);$i++)
+        {
+            $test = new ServTask();
+            $test->ServID = $servOff->id;
+            $test->ServTask = $request->servtask[$i];
+            $test->duration = $request->duration[$i];
+            $test->status = 1;
+            $test->save();
 
+
+        }
+        if($getMatFee!=null)
+        {
+        $fee = new ServMFee();
+        $fee->ServID = $servOff->id;
+        $fee->FeeID = $request->addmatfee;
+        $fee->amount = $getMatFee;
+        $fee->save();
+        }
+    
+        $totalFee =  $getWorkFee + $getMatFee;
+        
         $total = new ServTotal();
         $total->ServID = $servOff->id;
-        $total->total = $getTotalRPD+$getTotalMat+$getTotalEquip;
+        $total->total = $getTotalRPD + $getTotalMat + $getTotalEquip + $totalFee;
         $total->save();
+
+       
         
         // return redirect()->route('serviceOff.index');
         return Response($servOff);
@@ -150,7 +189,11 @@ class ServicesOfferedController extends Controller
         $equiptype = EquipType::where('status',1)
                         ->where('todelete',1)
                         ->get();
-        return view('layouts.O.mainte.services.addservice', compact('spec','material','materialClass','uom','equip','equiptype'));
+
+        $addfee = Fee::where('status',1)
+                        ->where('todelete',1)
+                        ->get();
+        return view('layouts.O.mainte.services.addservice', compact('spec','material','materialClass','uom','equip','equiptype','addfee'));
     }
      public function readMaterial()
     {
@@ -235,7 +278,15 @@ class ServicesOfferedController extends Controller
 
         return Response($none);
     }
+    public function findFee($id)
+    {
+        $fee = Fee::where('id',$id)
+                        ->where('status',1)
+                        ->where('todelete',1)
+                        ->get();
 
+        return Response($fee);
+    }
     public function edit($serveID)
     {
         $servee = ServicesOffered::find($serveID);
@@ -244,16 +295,16 @@ class ServicesOfferedController extends Controller
 
     public function update(Request $request, $serveID)
     {
-        $servename = ServicesOffered::where('ServiceOffName', '=', $request->ServiceOffName )
-                ->where('todelete','=',1)
-                ->get();
-        if($servename->count() == 0)
-        {
-            $updserve = ServicesOffered::find($serveID);
-            $updserve->ServiceOffName = $request->ServiceOffName;
-            $updserve->save();
-            return Response($updserve);
-        } 
+        // $servename = ServicesOffered::where('ServiceOffName', '=', $request->ServiceOffName )
+        //         ->where('todelete','=',1)
+        //         ->get();
+        // if($servename->count() == 0)
+        // {
+        //     $updserve = ServicesOffered::find($serveID);
+        //     $updserve->ServiceOffName = $request->ServiceOffName;
+        //     $updserve->save();
+        //     return Response($updserve);
+        // } 
     }
     
     public function checkbox($id)

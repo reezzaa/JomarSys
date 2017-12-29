@@ -1,4 +1,4 @@
-@extends('layouts.O.utilities.main')
+@extends('layouts.BD.utilities.main')
 @section('head')
 <script>
   function companyinfo()
@@ -8,7 +8,7 @@
         ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('o.utilities.companyinfo') }}",
+          url  : "{{ route('bd.utilities.companyinfo') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -29,7 +29,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('o.utilities.smartcounter') }}",
+          url  : "{{ route('bd.utilities.smartcounter') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -50,7 +50,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('rate.index') }}",
+          url  : "{{ route('bdrate.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -71,7 +71,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('misc.index') }}",
+          url  : "{{ route('bdmisc.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -92,7 +92,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('fee.index') }}",
+          url  : "{{ route('bdfee.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -106,27 +106,7 @@
           NProgress.done();
          ///////////////////////////////////////////
     };
-    function showpaymentform()
-    {
-      /////////////////stop top loading//////////
-      NProgress.start();
-      ///////////////////////////////////////////
-        $.ajax({
-          type : 'get',
-          url  : "{{ route('paymentform.index') }}",
-          dataType : 'html',
-          success:function(data)
-          {
-              $('.table-responsive').html(data);
-
-              // $('[data-toggle="tooltip"]').tooltip();
-              $('#title').html('<strong>Form of Payment</strong>');
-          }
-        })
-         /////////////////stop top loading//////////
-          NProgress.done();
-         ///////////////////////////////////////////
-    };
+    
     function showtax()
     {
       /////////////////stop top loading//////////
@@ -134,7 +114,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('tax.index') }}",
+          url  : "{{ route('bdtax.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -155,7 +135,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('retention.index') }}",
+          url  : "{{ route('bdretention.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -176,7 +156,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('recoupment.index') }}",
+          url  : "{{ route('bdrecoupment.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -197,7 +177,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('paymentmode.index') }}",
+          url  : "{{ route('bdpaymentmode.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -222,9 +202,9 @@
           <!-- Sidebar Content -->
           <div class="sidebar-content">
               <!-- Icon for user -->
-              @include('layouts.O.usericon')
+              @include('layouts.BD.usericon')
               <!-- Sidebar Navigation -->
-              @include('layouts.O.sidebar')
+              @include('layouts.BD.sidebar')
               <!-- END Sidebar Navigation -->
           </div>
           <!-- END Sidebar Content -->
@@ -286,7 +266,7 @@
       </div>
   </div>
   <ol class="breadcrumb breadcrumb-top">
-      <li><a href="{{ route('o.home') }}"><i class="fa fa-home"></i></a></li>
+      <li><a href="{{ route('bd.home') }}"><i class="fa fa-home"></i></a></li>
       <li><a href="javascript:void(0)">Utilities</a></li>
   </ol>
   <div class="row">
@@ -314,9 +294,7 @@
               <li>
                 <a type="button" onclick="showpaymentmode()"><strong>Mode of Payment</strong></a>
               </li>
-              <li>
-                <a type="button" onclick="showpaymentform()"><strong>Form of Payment</strong></a>
-              </li>
+              
               <li>
                 <a type="button" onclick="showtax()"><strong>Tax</strong></a>
               </li>

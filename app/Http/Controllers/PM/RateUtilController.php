@@ -1,7 +1,7 @@
 <?php
 
 // namespace App\Http\Controllers;
-namespace App\Http\Controllers\O;
+namespace App\Http\Controllers\PM;
 
 use App\Http\Controllers\Controller;
 
@@ -14,12 +14,12 @@ class RateUtilController extends Controller
 
      public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:projectmanager');
     }
     public function index()
     {
         $rate = Rate::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.rate.rate',compact('rate'));
+        return view('layouts.PM.utilities.rate.rate',compact('rate'));
     }
 
     public function store(Request $request)

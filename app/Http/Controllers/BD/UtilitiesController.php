@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\CompanyUtil;
-
-
-
+use App\EmployeeIDUtil;
+use App\ClientIDUtil;
+use App\ContractIDUtil;
+use App\InvoiceIDUtil;
+use App\OrIDUtil;
 use DB;
 use Response;
 class UtilitiesController extends Controller
@@ -30,21 +32,24 @@ class UtilitiesController extends Controller
     public function index()
     {
         
-        return view('layouts.O.utilities.index');
+        return view('layouts.BD.utilities.index');
     }
 
     public function companyinfo()
     {
          $utilities = CompanyUtil::all();
          // dd($utilities);
-        return view('layouts.O.utilities.company.companyinfo',compact('utilities'));
+        return view('layouts.BD.utilities.company.companyinfo',compact('utilities'));
 
     }
     public function smartcounter()
     {
         $employeeID = DB::table('tblEmpIDUtil')->get();
         $clientID = DB::table('tblClientIDUtil')->get();
-        return view('layouts.O.utilities.smartcounter.smartcounter',compact('employeeID','clientID'));
+        $contractID = DB::table('tblContractIDUtil')->get();
+        $invoiceID = DB::table('tblInvoiceIDUtil')->get();
+        $orID = DB::table('tblOrIDUtil')->get();
+        return view('layouts.BD.utilities.smartcounter.smartcounter',compact('employeeID','clientID','contractID','invoiceID','orID'));
 
     }
     public function store(Request $request)
@@ -59,7 +64,7 @@ class UtilitiesController extends Controller
         }
         CompanyUtil::create($formInput);
         \Session::flash('flash_add_success','Company Information Added!');
-        return redirect()->route('utilities.index');
+        return redirect()->route('bdutilities.index');
     }
 
     public function update(Request $request, $id)
@@ -79,7 +84,7 @@ class UtilitiesController extends Controller
             $utilities->update($formInput);
         }
         \Session::flash('flash_edit_success','Company Information Edited!');
-        return redirect()->route('utilities.index');
+        return redirect()->route('bdutilities.index');
     }
 
     public function storeEmpID(Request $request)
@@ -87,14 +92,35 @@ class UtilitiesController extends Controller
         $formInput = $request->all();
         EmployeeIDUtil::create($formInput);
         \Session::flash('flash_emp_success','Company Information Edited!');
-        return redirect()->route('utilities.index');
+        return redirect()->route('bdutilities.index');
     }
     public function storeClientID(Request $request)
     {
         $formInput = $request->all();
         ClientIDUtil::create($formInput);
         \Session::flash('flash_client_success','Company Information Edited!');
-        return redirect()->route('utilities.index');
+        return redirect()->route('bdutilities.index');
+    }
+     public function storeContractID(Request $request)
+    {
+        $formInput = $request->all();
+        ContractIDUtil::create($formInput);
+        return redirect()->route('bdutilities.index');
+
+    }
+    public function storeInvoiceID(Request $request)
+    {
+        $formInput = $request->all();
+        InvoiceIDUtil::create($formInput);
+        return redirect()->route('bdutilities.index');
+
+    }
+    public function storeOrID(Request $request)
+    {
+        $formInput = $request->all();
+        OrIDUtil::create($formInput);
+        return redirect()->route('bdutilities.index');
+        
     }
    
 }

@@ -13,12 +13,12 @@ class PaymentModeUtilController extends Controller
     //
       public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:budgetdepartment');
     }
     public function index()
     {
         $mode = PaymentMode::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.paymentmode.paymentmode',compact('mode'));
+        return view('layouts.BD.utilities.paymentmode.paymentmode',compact('mode'));
     }
     
     public function store(Request $request)

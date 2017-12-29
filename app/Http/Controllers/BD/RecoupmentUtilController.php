@@ -13,12 +13,12 @@ class RecoupmentUtilController extends Controller
     //
      public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:budgetdepartment');
     }
     public function index()
     {
         $recoupment = Recoupment::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.recoupment.recoupment',compact('recoupment'));
+        return view('layouts.BD.utilities.recoupment.recoupment',compact('recoupment'));
     }
     
     public function store(Request $request)

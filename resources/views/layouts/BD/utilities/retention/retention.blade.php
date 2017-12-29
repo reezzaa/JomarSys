@@ -6,7 +6,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('retention.index') }}",
+          url  : "{{ route('bdretention.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -22,7 +22,7 @@
     };
  </script>
  <div>
-   {!! Form::open(['url'=>'retention', 'method'=>'POST', 'id'=>'frm-insert']) !!}
+   {!! Form::open(['url'=>'bdretention', 'method'=>'POST', 'id'=>'frm-insert']) !!}
                       <div class="col-md-12">
                           <div class="form-group">
                           <label for="retention" class="col-md-3">Retention Value <span class="text-danger">*</span></label> 
@@ -108,7 +108,7 @@
                 <h3 class="themed-background" style="color:white;"><strong>Edit Retention</strong></h3>
               </div>
 
-              {!! Form::open(['url'=>'{{ route(o.utilities.retention)}}','method'=>'PUT','id'=>'frm-upd']) !!}
+              {!! Form::open(['url'=>'{{ route(bd.utilities.retention)}}','method'=>'PUT','id'=>'frm-upd']) !!}
               <div class="form-group">
                  <label for="retentions">Retention Value</label> 
                  <span class="text-danger">*</span> 
@@ -148,7 +148,7 @@
             </div>
             <h3 class="themed-background" style="color:white;"><strong>Delete Form of Payment</strong></h3>
           </div>
-           {!!Form::open(['url'=>'{{ route(o.utilities.retention.del)}}','method'=>'PUT','id'=>'frm-del'])!!}
+           {!!Form::open(['url'=>'{{ route(bd.utilities.retention.del)}}','method'=>'PUT','id'=>'frm-del'])!!}
                 <p><h4>Are you sure you want to delete</h4>
                 </p>
                 <p hidden><b id="deleteID"></b></p>
@@ -175,7 +175,7 @@
       var selfName = '';
       var className = '';
       var id='';
-      var url = "retention";
+      var url = "bdretention";
        $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -6,7 +6,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('paymentmode.index') }}",
+          url  : "{{ route('pmpaymentmode.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -22,7 +22,7 @@
     };
  </script>
  <div>
-   {!! Form::open(['url'=>'paymentmode', 'method'=>'POST', 'id'=>'frm-insert']) !!}
+   {!! Form::open(['url'=>'pmpaymentmode', 'method'=>'POST', 'id'=>'frm-insert']) !!}
                       <div class="col-md-12">
                           <div class="form-group">
                           <label for="paymentmode" class="col-md-3">Mode Value <span class="text-danger">*</span></label> 
@@ -108,7 +108,7 @@
                 <h3 class="themed-background" style="color:white;"><strong>Edit Mode of Payment</strong></h3>
               </div>
 
-              {!! Form::open(['url'=>'{{ route(o.utilities.paymentmode)}}','method'=>'PUT','id'=>'frm-upd']) !!}
+              {!! Form::open(['url'=>'{{ route(pm.utilities.paymentmode)}}','method'=>'PUT','id'=>'frm-upd']) !!}
               <div class="form-group">
                  <label for="paymentmodes">Mode Value</label> 
                  <span class="text-danger">*</span> 
@@ -148,7 +148,7 @@
             </div>
             <h3 class="themed-background" style="color:white;"><strong>Delete Mode of Payment</strong></h3>
           </div>
-           {!!Form::open(['url'=>'{{ route(o.utilities.mode.del)}}','method'=>'PUT','id'=>'frm-del'])!!}
+           {!!Form::open(['url'=>'{{ route(pm.utilities.mode.del)}}','method'=>'PUT','id'=>'frm-del'])!!}
                 <p><h4>Are you sure you want to delete</h4>
                 </p>
                 <p hidden><b id="deleteID"></b></p>
@@ -175,7 +175,7 @@
       var selfName = '';
       var className = '';
       var id='';
-      var url = "paymentmode";
+      var url = "pmpaymentmode";
        $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

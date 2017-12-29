@@ -1,7 +1,7 @@
 <?php
 
 // namespace App\Http\Controllers;
-namespace App\Http\Controllers\O;
+namespace App\Http\Controllers\PM;
 use App\Http\Controllers\Controller;
 
 use App\Recoupment;
@@ -13,12 +13,12 @@ class RecoupmentUtilController extends Controller
     //
      public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:projectmanager');
     }
     public function index()
     {
         $recoupment = Recoupment::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.recoupment.recoupment',compact('recoupment'));
+        return view('layouts.PM.utilities.recoupment.recoupment',compact('recoupment'));
     }
     
     public function store(Request $request)

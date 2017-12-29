@@ -18,7 +18,7 @@
            ₱ {{ $u->total }}
         </td>
         <td class="text-center">
-            {{ $u->duration }} {{ $u->unit }}
+            {{ $u->duration }} day/s
         </td>
         <td class="text-center">
           <label class="switch switch-primary">

@@ -6,7 +6,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('tax.index') }}",
+          url  : "{{ route('bdtax.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -22,7 +22,7 @@
     };
  </script>
  <div>
-   {!! Form::open(['url'=>'tax', 'method'=>'POST', 'id'=>'frm-insert']) !!}
+   {!! Form::open(['url'=>'bdtax', 'method'=>'POST', 'id'=>'frm-insert']) !!}
                       <div class="col-md-5">
                           <div class="form-group">
                           <label for="taxdesc">Description</label> <span class="text-danger">*</span> 
@@ -123,7 +123,7 @@
                 <h3 class="themed-background" style="color:white;"><strong>Edit Tax</strong></h3>
               </div>
 
-              {!! Form::open(['url'=>'{{ route(o.utilities.tax)}}','method'=>'PUT','id'=>'frm-upd']) !!}
+              {!! Form::open(['url'=>'{{ route(bd.utilities.tax)}}','method'=>'PUT','id'=>'frm-upd']) !!}
               <div class="form-group">
                  <label for="taxdescs">Description</label> 
                  <span class="text-danger">*</span> 
@@ -174,7 +174,7 @@
             </div>
             <h3 class="themed-background" style="color:white;"><strong>Delete Tax</strong></h3>
           </div>
-           {!!Form::open(['url'=>'{{ route(o.utilities.tax.del)}}','method'=>'PUT','id'=>'frm-del'])!!}
+           {!!Form::open(['url'=>'{{ route(bd.utilities.tax.del)}}','method'=>'PUT','id'=>'frm-del'])!!}
                 <p><h4>Are you sure you want to delete</h4>
                 </p>
                 <p hidden><b id="deleteID"></b></p>
@@ -202,7 +202,7 @@
       var selfName = '';
       var className = '';
       var id='';
-      var url = "tax";
+      var url = "bdtax";
        $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -1,7 +1,7 @@
 <?php
 
 // namespace App\Http\Controllers;
-namespace App\Http\Controllers\O;
+namespace App\Http\Controllers\PM;
 use App\Http\Controllers\Controller;
 
 use App\Tax;
@@ -13,12 +13,12 @@ class TaxUtilController extends Controller
     //
      public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:projectmanager');
     }
     public function index()
     {
         $tax = Tax::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.tax.tax',compact('tax'));
+        return view('layouts.PM.utilities.tax.tax',compact('tax'));
     }
     
     public function store(Request $request)

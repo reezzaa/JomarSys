@@ -13,12 +13,12 @@ class TaxUtilController extends Controller
     //
      public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:budgetdepartment');
     }
     public function index()
     {
         $tax = Tax::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.tax.tax',compact('tax'));
+        return view('layouts.BD.utilities.tax.tax',compact('tax'));
     }
     
     public function store(Request $request)

@@ -14,12 +14,12 @@ class RateUtilController extends Controller
 
      public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:budgetdepartment');
     }
     public function index()
     {
         $rate = Rate::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.rate.rate',compact('rate'));
+        return view('layouts.BD.utilities.rate.rate',compact('rate'));
     }
 
     public function store(Request $request)

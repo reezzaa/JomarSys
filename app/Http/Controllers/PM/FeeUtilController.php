@@ -1,7 +1,7 @@
 <?php
 
 // namespace App\Http\Controllers;
-namespace App\Http\Controllers\O;
+namespace App\Http\Controllers\PM;
 use App\Http\Controllers\Controller;
 
 use App\Fee;
@@ -13,12 +13,12 @@ class FeeUtilController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:projectmanager');
     }
     public function index()
     {
         $fee = Fee::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.fee.fee',compact('fee'));
+        return view('layouts.PM.utilities.fee.fee',compact('fee'));
     }
     
     public function store(Request $request)

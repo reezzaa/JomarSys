@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/plugins.css')}}">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-    <link id="theme-link" rel="stylesheet" href="{{asset('css/themes/blue.css')}}">
+    <link id="theme-link" rel="stylesheet" href="{{asset('css/themes/flatie.css')}}">
     <link rel="stylesheet" href="{{asset('css/themes.css')}}">
     <script src="{{asset('dist/sweetalert.min.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('dist/sweetalert.css')}}">
@@ -19,31 +19,8 @@
     <script src="{{asset('js/vendor/jquery-latest.min.js')}}"></script>
     <script src="{{asset('js/vendor/jquery.alphanum.js')}}"></script>
     <script src="{{asset('js/vendor/jquery.mask.min.js')}}"></script>
-     <style>
-    .btn-file {
-        position: relative;
-        overflow: hidden;
-        }
-        .btn-file input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            min-width: 100%;
-            min-height: 100%;
-            font-size: 100px;
-            text-align: right;
-            filter: alpha(opacity=0);
-            opacity: 0;
-            outline: none;
-            background: white;
-            cursor: inherit;
-            display: block;
-        }
-
-        #img-upload{
-            width: 60%;
-        }
-                          select:invalid { color: gray; }
+    <style>
+                  select:invalid { color: gray; }
             #addequip_modal {
             top:10%;
             outline: none;
@@ -62,6 +39,13 @@
             }
 
             #add_modal {
+            top:30%;
+            outline: none;
+            }
+            #sub_modal {
+            top:30%;
+            outline: none;
+            }#stock_modal {
             top:30%;
             outline: none;
             }

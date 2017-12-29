@@ -4,16 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServicesOffered extends Model
+class ServTask extends Model
 {
+    //
     protected $fillable = [
-      'ServiceOffName',
-      'todelete',
+      'ServID',
+      'ServTask',
       'status',
       'duration',
-      'remarks',
-      
     ];
     public $timestamps = false;
-    protected $table = 'tblServicesOffered';
+    protected $table = 'tblservtask';
 }

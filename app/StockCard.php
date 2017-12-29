@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServTotal extends Model
+class StockCard extends Model
 {
     //
     public $timestamps = false;
-    public $primaryKey = 'ServID';
-    protected $table = 'tblservtotal';
+    protected $table = 'tblstockcard';
 }

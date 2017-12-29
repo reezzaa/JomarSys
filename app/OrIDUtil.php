@@ -4,14 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PaymentForm extends Model
+class OrIDUtil extends Model
 {
     //
      protected $fillable = [
-      'FormDesc',
-      'status',
-      'todelete',
+      'strOrIDUtil'
     ];
     public $timestamps = false;
-    protected $table = 'tblpaymentform';
+    protected $primaryKey = 'strOrIDUtil';
+    protected $table = 'tblOrIDUtil';
 }

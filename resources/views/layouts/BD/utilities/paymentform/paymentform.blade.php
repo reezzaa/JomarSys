@@ -6,7 +6,7 @@
       ///////////////////////////////////////////
         $.ajax({
           type : 'get',
-          url  : "{{ route('paymentform.index') }}",
+          url  : "{{ route('bdpaymentform.index') }}",
           dataType : 'html',
           success:function(data)
           {
@@ -22,7 +22,7 @@
     };
  </script>
  <div>
-   {!! Form::open(['url'=>'paymentform', 'method'=>'POST', 'id'=>'frm-insert']) !!}
+   {!! Form::open(['url'=>'bdpaymentform', 'method'=>'POST', 'id'=>'frm-insert']) !!}
                       <div class="col-md-12">
                           <div class="form-group">
                           <label for="paymentform" class="col-md-2">Form of Payment <span class="text-danger">*</span></label> 
@@ -106,7 +106,7 @@
                 <h3 class="themed-background" style="color:white;"><strong>Edit Form of Payment</strong></h3>
               </div>
 
-              {!! Form::open(['url'=>'{{ route(o.utilities.paymentform)}}','method'=>'PUT','id'=>'frm-upd']) !!}
+              {!! Form::open(['url'=>'{{ route(bd.utilities.paymentform)}}','method'=>'PUT','id'=>'frm-upd']) !!}
               <div class="form-group">
                  <label for="paymentforms">Description</label> 
                  <span class="text-danger">*</span> 
@@ -144,7 +144,7 @@
             </div>
             <h3 class="themed-background" style="color:white;"><strong>Delete Form of Payment</strong></h3>
           </div>
-           {!!Form::open(['url'=>'{{ route(o.utilities.payment.del)}}','method'=>'PUT','id'=>'frm-del'])!!}
+           {!!Form::open(['url'=>'{{ route(bd.utilities.payment.del)}}','method'=>'PUT','id'=>'frm-del'])!!}
                 <p><h4>Are you sure you want to delete</h4>
                 </p>
                 <p hidden><b id="deleteID"></b></p>
@@ -171,7 +171,7 @@
       var selfName = '';
       var className = '';
       var id='';
-      var url = "paymentform";
+      var url = "bdpaymentform";
        $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

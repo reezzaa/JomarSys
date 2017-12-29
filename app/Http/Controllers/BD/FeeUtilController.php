@@ -13,12 +13,12 @@ class FeeUtilController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:budgetdepartment');
     }
     public function index()
     {
         $fee = Fee::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.fee.fee',compact('fee'));
+        return view('layouts.BD.utilities.fee.fee',compact('fee'));
     }
     
     public function store(Request $request)

@@ -13,12 +13,12 @@ class RetentionUtilController extends Controller
     //
      public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:budgetdepartment');
     }
     public function index()
     {
         $retention = Retention::where('todelete','=',1)->get();
-        return view('layouts.O.utilities.retention.retention',compact('retention'));
+        return view('layouts.BD.utilities.retention.retention',compact('retention'));
     }
     
     public function store(Request $request)

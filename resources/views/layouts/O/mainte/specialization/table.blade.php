@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="text-center">Specialization Name</th>
-      <th class="text-center">Rate/Day</th>
+      <th class="text-center">Rate/Hour</th>
       <th style="width: 60px;" class="text-center"></th>
       <th style="width: 200px;" class="text-center">Controls</th>
     </tr>

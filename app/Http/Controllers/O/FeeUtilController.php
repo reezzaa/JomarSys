@@ -32,7 +32,7 @@ class FeeUtilController extends Controller
             Fee::insert(['FeeDesc'=>$request->desc,
                 'FeeValue'=>$request->value,
                 'todelete'=>1,
-                'status'=>1
+                'status'=>1,
                 ]);
             return Response($addfee);
         }

@@ -13,12 +13,12 @@ class MiscUtilController extends Controller
 {
      public function __construct()
     {
-        $this->middleware('auth:operations');
+        $this->middleware('auth:budgetdepartment');
     }
     public function index()
     {
         $misc = Miscellaneous::where('todelete',1)->get();
-        return view('layouts.O.utilities.miscellaneous.miscellaneous',compact('misc'));
+        return view('layouts.BD.utilities.miscellaneous.miscellaneous',compact('misc'));
     }
 
     public function store(Request $request)

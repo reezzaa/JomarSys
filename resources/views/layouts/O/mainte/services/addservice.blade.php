@@ -6,7 +6,7 @@
 
     function readMaterial()
     {
-        $.ajax({
+              $.ajax({
           type : 'get',
           url  : '{{route("o.readMat")}}',
           dataType : 'html',
@@ -339,6 +339,83 @@
           NProgress.done();
           ///////////////////////////////////////////
     }
+
+
+    function addWorkFee(val)
+    {
+      /////////////////start top loading//////////
+        NProgress.start();
+        ///////////////////////////////////////////
+          var a;
+          $('#addworkfee_submit').text("Please Wait...");
+           $('#workfee_val').val("");
+           $('#workfee_desc').val("");
+
+          $.get('findFee/' + val, function (data) {
+          if(data.length != 0)
+          {
+            for(a=0;a<data.length;a++)
+            {
+              $('#workfee_val').val(data[a].FeeValue);
+              $('#workfee_desc').val(data[a].FeeDesc);
+              $('#addwork').val(data[a].id);
+
+            }
+          }
+        })
+          /////////////////stop top loading//////////
+          NProgress.done();
+          ///////////////////////////////////////////
+          $('#addworkfee_submit').text('Add');
+
+    }
+     function addMatFee(val)
+    {
+      /////////////////start top loading//////////
+        NProgress.start();
+        ///////////////////////////////////////////
+          var a;
+          $('#addmatfee_submit').text("Please Wait...");
+           $('#matfee_val').val("");
+           $('#matfee_desc').val("");
+           
+          $.get('findFee/' + val, function (data) {
+          if(data.length != 0)
+          {
+            for(a=0;a<data.length;a++)
+            {
+              $('#matfee_val').val(data[a].FeeValue);
+              $('#matfee_desc').val(data[a].FeeDesc);
+              $('#addmat').val(data[a].id);
+
+            }
+          }
+        })
+          /////////////////stop top loading//////////
+          NProgress.done();
+          ///////////////////////////////////////////
+          $('#addmatfee_submit').text("Add");
+
+    }
+     var wbool = true;
+    var mbool = true;
+
+    function wcheck()
+    {
+     if(wbool)
+    {
+      $('#addworkfee_div').html('<a id="workfee"><i class="gi gi-plus"></i> <strong>Add Additional Fee</strong></a>');
+    }
+}
+function mcheck()
+{
+     if(mbool)
+     {
+      $('#addmatfee_div').html('<a id="matfee"><i class="gi gi-plus"></i> <strong>Add Additional Fee</strong></a>');
+     }
+
+
+    }
    
 
     readMaterial();
@@ -381,17 +458,12 @@
         <li><a href="">Add </a></li>
 
     </ol>
-  
-       <div class="block">
-            {!! Form::open(['url'=>'o/serviceOff', 'method'=>'POST', 'id'=>'frm-insert']) !!}      
+        
+       <div class="row">
+            {!! Form::open(['url'=>'o/serviceOff', 'method'=>'POST', 'id'=>'frm-insert']) !!}  
+                
              @include('layouts.O.mainte.services.form')
-          <fieldset class="form-group">
-              <div class="col-md-offset-10">
-                 {!! Form::submit('Add',['id'=>'submit','class'=>'btn btn-info']) !!}
-                 {!! Form::button('Reset',['type'=>'reset','class'=>'btn btn-warning']) !!}
-              </div>
-           </fieldset>
-          <div class="clearfix"></div>
+         
             {!! Form::close() !!}
           <br>
         </div>
@@ -475,10 +547,11 @@
        $('#workerqty').val("");
       $('#addworker_modal').modal('show');
     });
+
     var worker = [];
     var workerqty = [];
     var rpd=[];
-
+    
     $('#addworker').click(function(){
       var name = $('#specname').val();
       var out_name = $('#specname').text();
@@ -492,7 +565,7 @@
               worker.push(name);
               workerqty.push(qty);
               rpd.push(out_rpd);
-
+              wcheck();
               $('#tblworker').append('<tr><td class="text-center">'+out_name+'</td><td class="text-center">'+qty+'</td></tr>');
               $('#addworker_modal').modal('hide');
            }
@@ -513,7 +586,7 @@
      var price = [];
      var materialqty = [];
      var cost = [];
-
+     
 
      $('#addmaterial').click(function(){
 
@@ -532,7 +605,7 @@
             // price.push(out_price);
             materialqty.push(out_qty);
             cost.push(out_cost);
-            // console.log($('#wname').val(worker));
+            mcheck();
             $('#tblmaterial').append('<tr><td class="text-center">'+out_name+'</td><td class="text-center">'+out_price+'</td><td class="text-center">'+out_qty+'</td><td class="text-center">'+out_cost+'</td></tr>');
             $('#addmat_modal').modal('hide');
              }
@@ -577,20 +650,70 @@
           }
 
     });
+      function Getday()
+      {
+         var tot=0;
+        for (var i = $('.servduration').length; i > 0; i--) 
+        {
+          // alert(i);
+           days = $('#servduration'+i).val(); 
+           console.log(days);
+           tot += parseFloat(days);
+            
+        }
+            
+        total_days=tot;
+        $('#duration').val(total_days);
+      }
+
+      var total_days='';
+      var days=0;
+      $(this).on('change','.servduration',function(){
+        Getday();
+      });
+      //Addtional Fee for Worker
+      $(this).on('click','#workfee',function(){
+        $('#addworkfee_modal').modal('show');
+      });
+
+       var workfeeval ="";
+      $('#addworkfee_submit').click(function(){
+
+       workfeeval = $('#workfee_val').val();
+        var workfeedesc = $('#workfee_desc').val();
+        $('#addworkfee_div').html('<table class="table table-vcenter table-striped table-condensed"><tbody><tr class="active"><td class="text-center"><strong>ADD: </strong> </td><td class="text-center">'+workfeeval+'% '+workfeedesc+'</td></tr></tbody></table>');
+        var wbool = false;
+        $('#addworkfee_modal').modal('hide');
+
+      });
+      //Additional Fee for Materials
+      $(this).on('click','#matfee',function(){
+        $('#addmatfee_modal').modal('show');
+      });
+       var matfeeval="";
+
+       $('#addmatfee_submit').click(function(){
+
+         matfeeval = $('#matfee_val').val();
+        var matfeedesc = $('#matfee_desc').val();
+        $('#addmatfee_div').html('<table class="table table-vcenter table-striped table-condensed"><tbody><tr class="active"><td class="text-center"><strong>ADD: </strong> </td><td class="text-center">'+matfeeval+'% '+matfeedesc+'</td></tr></tbody></table>');
+        var mbool = false;
+        $('#addmatfee_modal').modal('hide');
+
+      });
+       alert()
+
 
        //insert data
       $('#frm-insert').on('submit', function(e){
         // $('span#duplicate').hide();
         e.preventDefault();
-        // if($('#bankname').val().trim() != "")
-        //   {
             /////////////////start top loading//////////
           NProgress.start();
           ///////////////////////////////////////////
             var ddata = {
                 servname: $('#servname').val(),
                 duration: $('#duration').val(),
-                unit: $('#unit').val(),
                 servdesc: $('#servdesc').val(),
                 worker: worker,
                 workerqty: workerqty,
@@ -599,7 +722,13 @@
                 cost: cost,
                 materialqty: materialqty,
                 equipprice: equipprice,
-                equipname: equipname
+                equipname: equipname,
+                servtask: $('#servtask').val(),
+                servduration: $('.servduration').val(),
+                workfeeval: workfeeval,
+                matfeeval: matfeeval,
+                addworkfee: $('#addwork').val(),
+                addmatfee: $('#addmat').val()
 
             }
             // var ddata = $('#frm-insert').serialize();
@@ -611,13 +740,6 @@
               url : "/o/serviceOff",
               success:function(data){
               swal("Success","Service Added!", "success");
-              // swal({
-              //     position: "center",
-              //     type: "success",
-              //     title: "Success",
-              //     showConfirmButton: false,
-              //     timer: 100
-              // });
               window.location = '/o/serviceOff';
 
                 /////////////////stop top loading//////////
@@ -637,48 +759,47 @@
                  
               }
             })
-          // }
-          // else
-          // {
-          //   $('span#duplicate').text("Fill up required");
-          //   $('span#duplicate').show();
-          // }
           e.stopPropagation();
         });
 
 
-// //CLONE 
-// //Worker
+//CLONE 
+//Worker
 // $(function () {
-//     $('.addworkBtn').click(function () {
-//         var num     = $('.clone_worker').length, 
-//             newNum  = new Number(num + 1),     
-//             newElem = $('#worker' + num).clone().attr('id', 'worker' + newNum).fadeIn('slow'); 
+    $('#btnAdd').click(function () {
+        var num     = $('.clone_task').length, 
+            newNum  = new Number(num + 1),
+            newhue = newNum-1,    
+            newElem = $('#entry' + num).clone().attr('id', 'entry' + newNum); 
         
-//         newElem.find('#specname').attr('id', 'specname').attr('name','specname[]');
-//         $('#worker' + num).after(newElem);
-//         $('#specname').focus();
+        newElem.find('#servtask').attr('id', 'servtask').attr('name','servtask[]').val("");
+         newElem.find('#servduration'+newhue).attr('id', 'servduration'+newNum).attr('name','servduration[]').val("");
+        newElem.find('#num').text(newNum)
 
-//         $('.delworkBtn').attr('disabled', false);
+        $('#entry' + num).after(newElem);
+        $('#servtask').focus();
 
-//         if (newNum == 999999)
-//         $('.addworkBtn').attr('disabled', true);
-//     });
+        $('#btnDel').attr('disabled', false);
 
-//     $('.delworkBtn').click(function () {
-//                 var num = $('.clone_worker').length;
-    
-//                 $('#worker' + num).slideUp('slow', function () {$(this).remove();
-//                     if (num -1 === 1)
-//                      { 
-//                       $('.delworkBtn').attr('disabled', true);
-//                       $('.addworkBtn').attr('disabled', false);
-//                      }
-//             });
-//         return false;
-//     });
-//     $('.addworkBtn').attr('disabled', false);
-//     $('.delworkBtn').attr('disabled', true);
+        if (newNum == 999999)
+        $('#btnAdd').attr('disabled', true);
+    });
+
+    $('#btnDel').click(function () {
+                var num = $('.clone_task').length;
+                $('#entry' + num).slideUp('slow', function () {$(this).remove();
+                    if (num -1 === 1)
+                     { 
+                      $('#btnDel').attr('disabled', true);
+                      $('#btnAdd').attr('disabled', false);
+                     }
+                Getday();
+
+            });
+        return false;
+    });
+    $('#btnAdd').attr('disabled', false);
+    $('#btnDel').attr('disabled', true);
 
 
 // //Material
