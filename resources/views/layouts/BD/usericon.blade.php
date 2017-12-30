@@ -1,5 +1,5 @@
 <!-- Brand -->
-<a href="{{ route('o.home') }}" class="sidebar-brand">
+<a href="{{ route('bd.home') }}" class="sidebar-brand">
     <i class="gi gi-flash"></i><strong>JMSESMS</strong>
 </a>
 <!-- END Brand -->

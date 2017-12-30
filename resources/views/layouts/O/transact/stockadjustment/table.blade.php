@@ -1,7 +1,6 @@
 <table id="stock-datatable" class="table table-vcenter table-striped table-bordered table-hover">
   <thead>
     <tr>
-     <tr>
       <th class="text-center">Material Name</th>
       <th class="text-center"> Stock</th>
       <th class="text-center">Date as of</th>
@@ -22,7 +21,7 @@
         {{\Carbon\Carbon::parse($s->date_s)->toDayDateTimeString()}}
       </td>
       <td class="text-center">
-         <button id="view" class="btn btn-info btn-alt view" value="{{$s->id}}" data-toggle="tooltip" data-placement="top" data-original-title="Show Stock Card "> <span class="gi gi-eye_open"> </span> </button>
+         <button id="view" class="btn btn-info btn-alt view" value="{{$s->id}}" data-toggle="tooltip" data-placement="top" data-original-title="Show Stock Card"> <span class="gi gi-folder_closed"> </span> </button>
         <button id="add" class="btn btn-success btn-alt add" value="{{$s->id}}" data-toggle="tooltip" data-placement="top" data-original-title="In"> <span class="gi gi-inbox_in"></span> </button>
         <button id="subtract" class="btn btn-danger btn-alt subtract" value="{{$s->id}}" data-toggle="tooltip" data-placement="top" data-original-title="Out"> <span class="gi gi-inbox_out"></span> </button>
 
@@ -33,15 +32,30 @@
   </tbody>
 
 </table>
- <div id="stock_modal" class="modal fade edit-employee-modal" tabindex="-1" role="dialog" aria-labelledby="EditSupplierModal" aria-hidden="true" data-backdrop="static">
+ <div id="show_stock_modal" class="modal fade edit-employee-modal" tabindex="-1" role="dialog" aria-labelledby="EditSupplierModal" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="block full container-fluid">
+              <div class="block-title themed-background">
               <div class="block-options pull-right">
                           <a href="javascript:void(0)" class="btn btn btn-default close" data-dismiss="modal"><i class="fa fa-times"></i></a>
                       </div>
-                      <h3 class="themed-background" style="color:white;"><strong>Edit Specialization</strong></h3>
-
+                      <h3 class="themed-background" style="color:white;" id="name"></h3></div>
+          <table class="table table-vcenter table-striped table-borderless table-hover" style="font-family: 'Arial'">
+            <thead>
+              <tr>
+                <th class="text-center col-md-2">DATE</th>
+                <th class="text-center col-md-2">IN</th>
+                <th class="text-center col-md-2">OUT</th>
+                <th class="text-center col-md-2">BALANCE</th>
+                <th class="text-center col-md-2">UNIT COST</th>
+                <th class="text-center col-md-2">TOTAL COST</th>
+              </tr>
+            </thead>
+            <tbody id="area" class="text-center">
+              
+            </tbody>
+          </table>
              
         </div>
       </div>
@@ -52,11 +66,12 @@
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="block full container-fluid">
-              <div class="block-title">
-              <button class="close" data-dismiss="modal">&times;</button>
-              <h3>Replenish Stocks</h3>
-              </div>
-
+              <div class="block-title themed-background">
+               <div class="block-options pull-right">
+                          <a href="javascript:void(0)" class="btn btn btn-default close" data-dismiss="modal"><i class="fa fa-times"></i></a>
+                      </div>
+                      <h3 class="themed-background" style="color:white;"><strong>Replenish Stocks</strong></h3>
+                    </div>
                {!! Form::open(['url'=>route('stockadjustment.storeThis','classID'),'method'=>'POST','id'=>'frm-update']) !!}
                <input type="hidden" name="thisId" id="thisId" >
               <div class="form-group">
@@ -79,7 +94,7 @@
                     </script>
                 </div>
                   <input type="hidden" id="mats" name="mats">
-
+                  <input type="hidden" id="price_add" name="price_add">
                 <hr>
                 <div class="pull-right">
                 <input type="hidden" name="myId" id="myId">
@@ -96,11 +111,12 @@
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="block full container-fluid">
-              <div class="block-title">
-              <button class="close" data-dismiss="modal">&times;</button>
-              <h3>Deplete Stocks</h3>
-              </div>
-
+              <div class="block-title themed-background">
+            <div class="block-options pull-right">
+                          <a href="javascript:void(0)" class="btn btn btn-default close" data-dismiss="modal"><i class="fa fa-times"></i></a>
+                      </div>
+                      <h3 class="themed-background" style="color:white;"><strong>Deplete Stocks</strong></h3>
+                    </div>
                {!! Form::open(['url'=>route('stockadjustment.storeThat','classID'),'id'=>'frm-upd']) !!}
                <input type="hidden" name="thisIdd" id="thisIdd" >
               <div class="form-group">
@@ -127,6 +143,7 @@
                     </script>
                 </div>
                   <input type="hidden" id="matd" name="matd">
+                  <input type="hidden" id="price_sub" name="price_sub">
 
                 <hr>
                 <div class="pull-right">

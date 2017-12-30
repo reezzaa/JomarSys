@@ -23,10 +23,7 @@
                 </ul>
             </li>
     <li >
-        <a href=""><i class="gi gi-sort sidebar-nav-icon"></i>Billing </a>
-    </li>
-    <li >
-        <a href=""><i class="gi gi-sort sidebar-nav-icon"></i>Collection </a>
+        <a href="{{ route('billingcollection.index') }}"><i class="gi gi-sort sidebar-nav-icon"></i>Billing & Collection </a>
     </li>
    <!--  <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="hi hi-list"></i></a></span>

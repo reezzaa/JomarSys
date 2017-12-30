@@ -35,6 +35,26 @@
 
                     }
                    }
+    function findPrice(val)
+    { /////////////////start top loading//////////
+        NProgress.start();
+        ///////////////////////////////////////////
+        $('#price').val('');
+          var a4;
+          $.get('stockadjustment/findPrice/' + val, function (data) {
+          if(data.length != 0)
+          {
+            for(a4=0;a4<data.length;a4++)
+            {
+              $('#price').val(data[a4].MaterialUnitPrice);
+            }
+          }
+        })
+          /////////////////stop top loading//////////
+          NProgress.done();
+          ///////////////////////////////////////////
+
+    }
     readByAjax();
 </script>
 @endsection
@@ -74,12 +94,7 @@
        
       <!-- Simple Profile Widgets Row -->
       
-      <div class="block block-full">
-      <div class="block-title themed-background">
-        <h3 class="themed-background" style="color:white"><strong>Stock Adjustment</strong></h3>
-        </div> 
-          <br>
-
+      <div class="block">
           <div class="table-responsive">
         </div>
         <br>
@@ -88,14 +103,16 @@
                 <div class="modal-dialog modal-md">
                   <div class="modal-content">
                       <div class="block full container-fluid">
-                        <div class="block-title">
-                        <button class="close" data-dismiss="modal">&times;</button>
-                          <h3>Add Stock</h3>
-                        </div>
+                         <div class="block-title themed-background">
+                            <div class="block-options pull-right">
+                                        <a href="javascript:void(0)" class="btn btn btn-default close" data-dismiss="modal"><i class="fa fa-times"></i></a>
+                                    </div>
+                                    <h3 class="themed-background" style="color:white;"><strong>Add Stock</strong></h3></div>
+                        
                         {!! Form::open(['url'=>'stockadjustment', 'method'=>'POST', 'id'=>'frm-insert']) !!}
                          <div class="form-group">
                             <label for="mat">Material <span class="text-danger">*</span>  </label>
-                            {!! Form::select('mat', $mat, null,  ['id'=>'mat','class'=>'form-control', 'placeholder'=>' ']) !!}
+                            {!! Form::select('mat', $mat, null,  ['id'=>'mat','class'=>'form-control', 'placeholder'=>' ','onchange'=>'findPrice(this.value)']) !!}
                           </div>
                           <span id="duplicates2" class="help-block animation-slideDown">
                     Duplicate Material
@@ -110,7 +127,7 @@
                           allowMinus:   false
                       });
                     </script>
-                    
+                        <input type="hidden" id="price" name="price">
                         </div>
                         <div class="pull-right">
                           <button id="cancel" type="button" class="btn btn-warning" data-dismiss="modal"><span class="gi gi-remove_2"></span> Cancel</button>
@@ -161,6 +178,7 @@
           $('#stock_modal').modal('show');
         });
 
+
        $('#frm-insert').on('submit', function(e){
           e.preventDefault();
           var ddata = $("#frm-insert").serialize();
@@ -190,6 +208,7 @@
                   $('#quantitys').val(data.stocks);
                   $('#mats').val(data.MatID);
                   $('#matsname').val(data.MaterialName);
+                  $('#price_add').val(data.MaterialUnitPrice);
                   selfName = $('#quantitys').val();
                   className = $('#mats').val();
                   $('#add_modal').modal('show');
@@ -204,6 +223,7 @@
                   $('#quantityd').val(data.stocks);
                   $('#matd').val(data.MatID);
                   $('#matdname').val(data.MaterialName);
+                  $('#price_sub').val(data.MaterialUnitPrice);
                   selfName = $('#quantityd').val();
                   className = $('#matd').val();
           $('span#duplicates3').hide();
@@ -253,7 +273,47 @@
           })
         }); 
 
+        $(this).on('click','#view',function(){
+           var classID = $(this).val();
+          var a,b=0;
 
+         /////////////////top loading//////////
+          NProgress.start();
+          /////////////////////////////////////
+          $.ajax({
+          type : 'get',
+          url  : url+'/'+classID,
+          dataType: 'json',
+          success:function(data){
+            for(a=0;a<1;a++)
+            {
+                document.getElementById("name").innerHTML += '<strong>'+data[a].MaterialName+'</strong>';
+                $('#show_stock_modal').modal('show');
+
+            }
+             for(a=0;a<data.length;a++)
+            {
+              if(data[a].method == 'IN')
+              {
+                document.getElementById("area").innerHTML += '<tr><td>'+data[a].date+'</td><td>'+data[a].quantity+' '+data[a].UOMUnitSymbol+'</td><td></td><td>'+data[a].stock+' '+data[a].UOMUnitSymbol+'</td><td> ₱ '+data[a].cost+'</td><td> ₱ '+data[a].totalcost+'</td></tr>';
+
+              }
+              else
+              {
+                document.getElementById("area").innerHTML += '<tr><td>'+data[a].date+'</td><td></td><td>'+data[a].quantity+' '+data[a].UOMUnitSymbol+'</td><td>'+data[a].stock+' '+data[a].UOMUnitSymbol+'</td><td> ₱ '+data[a].cost+'</td><td> ₱ '+data[a].totalcost+'</td></tr>';
+              }
+            }
+          }
+          });
+
+           /////////////////stop top loading//////////
+            NProgress.done();
+            ///////////////////////////////////////////
+          $('#name').empty();
+          $('#area').empty();
+
+
+        });
     });
   </script>
 

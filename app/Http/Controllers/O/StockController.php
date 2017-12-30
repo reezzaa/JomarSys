@@ -30,7 +30,7 @@ class StockController extends Controller
         ->join('tblstocks','tblstocks.MatID','tblmaterial.id')
         ->join('tblmaterialclass','tblmaterialclass.id','tblmaterial.MatClassID')
         ->join('tblmaterialtype','tblmaterialtype.id','tblmaterialClass.MatTypeID')
-        ->select('tblmaterial.MaterialName','tblstocks.stocks','tblstocks.date as date_s','tblmaterial.id')
+        ->select('tblmaterial.MaterialName','tblstocks.stocks','tblstocks.date as date_s','tblmaterial.id','tblmaterial.MaterialUnitPrice')
         ->where('tblmaterial.status',1)
         ->where('tblmaterial.todelete',1)
         ->where('tblmaterialclass.status',1)
@@ -45,12 +45,14 @@ class StockController extends Controller
     public function store(Request $request)
     {
         //
-       $var = new StockCard();
+        $var = new StockCard();
         $var->MatID=$request->mat;
         $var->quantity=$request->quantity;
         $var->date=Carbon::now(Config::get('app.timezone'));
         $var->method='IN';
         $var->stock=$request->quantity;
+        $var->cost = $request->price;
+        $var->totalcost = ($request->quantity * $request->price);
         $var->save();
 
         $sto = new Stocks();
@@ -66,6 +68,7 @@ class StockController extends Controller
         //
         $sto=Stocks::find($request->matd);
         $sto->stocks=($request->quantityd-$request->qtyd);
+        $sto->date=Carbon::now(Config::get('app.timezone'));
         $sto->save();
 
         $var = new StockCard();
@@ -74,6 +77,8 @@ class StockController extends Controller
         $var->date=Carbon::now(Config::get('app.timezone'));
         $var->method='OUT';
         $var->stock=($request->quantityd-$request->qtyd);
+        $var->cost = $request->price_sub;
+        $var->totalcost = ($request->qtyd * $request->price_sub);
         $var->save();
 
          return redirect(route('stockadjustment.index'));
@@ -85,6 +90,7 @@ class StockController extends Controller
         //
         $sto=Stocks::find($request->mats);
         $sto->stocks=($request->quantitys+$request->qty);
+        $sto->date=Carbon::now(Config::get('app.timezone'));
         $sto->save();
 
         $var = new StockCard();
@@ -93,6 +99,8 @@ class StockController extends Controller
         $var->date=Carbon::now(Config::get('app.timezone'));
         $var->method='IN';
         $var->stock=($request->quantitys+$request->qty);
+        $var->cost = $request->price_add;
+        $var->totalcost = ($request->qty * $request->price_add);
         $var->save();
 
          return redirect(route('stockadjustment.index'));
@@ -106,7 +114,7 @@ class StockController extends Controller
         $mate=DB::table('tblmaterial')
         ->join('tblstocks','tblstocks.MatID','tblmaterial.id')
         ->where('tblmaterial.id',$id)
-        ->select('tblstocks.stocks','tblstocks.MatID','tblmaterial.MaterialName')
+        ->select('tblstocks.stocks','tblstocks.MatID','tblmaterial.MaterialName','tblmaterial.MaterialUnitPrice')
         ->first();
         return response::json($mate);
     }
@@ -114,9 +122,23 @@ class StockController extends Controller
     {
         $mate=DB::table('tblmaterial')
         ->join('tblstockcard','tblstockcard.MatID','tblmaterial.id')
+        ->join('tbldetailuom','tbldetailuom.id','tblmaterial.MatUOM')
         ->where('tblmaterial.id',$id)
-        ->select('tblstockcard.stock','tblstockcard.MatID','tblmaterial.MaterialName','tblstockcard.quantity','tblstockcard.date')
+        ->select('tblstockcard.*','tblmaterial.MaterialName','tbldetailuom.UOMUnitSymbol')
         ->orderby('tblstockcard.date')
+        ->get();
+        foreach ($mate as $key ) {
+             $key->cost=number_format($key->cost,2);
+             $key->totalcost=number_format($key->totalcost,2);
+            }
+
+        return response::json($mate);
+    }
+    public function findPrice($id)
+    {
+         $mate=DB::table('tblmaterial')
+        ->where('tblmaterial.id',$id)
+        ->select('tblmaterial.MaterialUnitPrice')
         ->get();
         return response::json($mate);
     }

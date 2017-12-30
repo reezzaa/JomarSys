@@ -113,6 +113,12 @@ Route::prefix('bd')->group(function(){
 	Route::put('/bdpaymentmode/checkbox/{id}', 'BD\PaymentModeUtilController@checkbox');
 	Route::put('/bdpaymentmode/{id}/delete ','BD\PaymentModeUtilController@delete')->name('bd.utilities.mode.del');
 	////////////////////////////////////////////////////////
+
+	//billing and Collection
+	Route::resource('/billingcollection','BD\BillingCollectionController');
+	Route::get('/readByAjax1','BD\BillingCollectionController@readByAjax');
+
+
 });
 
 Route::prefix('o')->group(function(){
@@ -254,6 +260,7 @@ Route::prefix('o')->group(function(){
 
 	Route::resource('/stockadjustment','O\StockController');
 	Route::get('/readByAjax15','O\StockController@readByAjax');
+	Route::get('/stockadjustment/findPrice/{id}','O\StockController@findPrice')->name('o.stockadjustment.findPrice');
 	Route::post('/stockadjustment/{id}/storeThis',['as'=>'stockadjustment.storeThis','uses'=>'O\StockController@storeThis']);
 	Route::post('/stockadjustment/{id}/storeThat',['as'=>'stockadjustment.storeThat','uses'=>'O\StockController@storeThat']);
 

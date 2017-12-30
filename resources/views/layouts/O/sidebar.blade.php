@@ -105,9 +105,6 @@
     <li>
         <a href=""><i class="fa fa-files-o sidebar-nav-icon"></i>Equipment</i></a>
     </li>
-    <li>
-        <a href=""><i class="fa fa-files-o sidebar-nav-icon"></i>Stock Card</a>
-    </li>
     <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="fa fa-child"></i></a></span>
          <span class="sidebar-header-title">User Account</span>
