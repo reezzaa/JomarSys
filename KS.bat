@@ -23,6 +23,9 @@ IF NOT EXIST "C:\Program Files\Git\bin" (
     SET gitdir="C:\Program Files (x86)\Git\bin"
 ) 
 
+SET wipescript="wipeinit.sql"
+SET nightlyscript=""
+
 SET PHPX=C:\xampp\php\php.exe
 
 :: Start Laravel Server
@@ -104,7 +107,7 @@ IF %1==build (
 
     IF %2==database (
         ECHO "Reloading database..."
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 < %dbsetupdir%\wipeinit.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 < %dbsetupdir%\%wipescript%
         %mariadbx% -uroot -h127.0.0.1 --port=3306 dbBarangay < %dbdumpdir%\dbbaranggay_nightly.sql
 
         GOTO COMOK
@@ -124,7 +127,7 @@ IF %1==build (
 
     IF %2==sysback (
         ECHO "Reloading database..."
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 < %dbsetupdir%\wipeinit.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 < %dbsetupdir%\%wipescript%
         %mariadbx% -uroot -h127.0.0.1 --port=3306 dbBarangay < %dbdumpdir%\dbbaranggay_nightly.sql
 
         ECHO "Wiping migrations folder..."
@@ -166,7 +169,7 @@ IF %1==database (
 
     IF %2==wipe (
         ECHO "Wiping database..."
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 < %dbsetupdir%\wipeinit.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 < %dbsetupdir%\%wipescript%
 
         GOTO COMOK
     )
