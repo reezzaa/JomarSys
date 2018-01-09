@@ -78,6 +78,46 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
+
+      $(this).on('click','.view_supp',function()
+      {
+        var classID = $(this).val();
+          var a,b=0;
+
+         /////////////////top loading//////////
+          NProgress.start();
+          /////////////////////////////////////
+          $.ajax({
+          type : 'get',
+          url  : url+'/'+classID,
+          dataType: 'json',
+          success:function(data){
+            for(a=0;a<1;a++)
+            {
+                document.getElementById("nameheader").innerHTML += '<strong>'+data[a].ServiceOffName+'</strong>';
+                $('#view_modal').modal('show');
+                
+
+            }
+            // $.get('fetch', function (data) {
+            // for (a=0;a<data.length;a++) 
+            // {
+            // //   document.getElementById("right").innerHTML += '<ol> <strong>  Price: </strong>  ₱ '+data[a].MaterialUnitPrice+'</ol>';
+            // //  document.getElementById("header").innerHTML += '<ol> <strong>  Type: </strong>'+data[a].MatTypeName+'</ol><ol><strong>  Classification: </strong>'+data[a].MatClassName+'</ol><br><ol><strong>  Unit of Measurement: </strong>'+data[a].DetailUOMText+'</ol>';
+            // //   document.getElementById("detail").innerHTML += ' <hr> <ol><h4><strong>Specifications</strong></h4><br> <ol> <strong>Brand: </strong>'+data[a].MaterialBrand+'</ol><ol> <strong>Size: </strong>'+data[a].MaterialSize+'</ol><ol> <strong>Color: </strong>'+data[a].MaterialColor+'</ol><ol> <strong>Dimension: </strong>'+data[a].MaterialDimension+'</ol>';
+            // }
+            
+          }
+          });
+
+           /////////////////stop top loading//////////
+            NProgress.done();
+            ///////////////////////////////////////////
+          $('#nameheader').empty();
+          $('#right').empty();
+          $('#header').empty();
+          $('#detail').empty();
+      });
        //status listen edit
       $(this).on('change','#status',function(e){ 
        /////////////////start top loading//////////

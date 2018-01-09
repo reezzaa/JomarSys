@@ -112,10 +112,9 @@ class ServicesOfferedController extends Controller
             $test->todelete = 1;
             $test->save();
 
-            $getTotalMat+= $request->materialqty[$i]*$request->cost[$i];
+            $getTotalMat+= $request->cost[$i];
 
         }
-        $getMatFee = ($getTotalMat * $request->matfeeval)/100;
         for($i = 0;$i<count($request->equipname);$i++)
         {
             $test = new ServEquipment();
@@ -138,8 +137,10 @@ class ServicesOfferedController extends Controller
 
 
         }
-        if($getMatFee!=null)
+        if($request->matfeeval!=null)
         {
+        $getMatFee = ($getTotalMat * $request->matfeeval)/100;
+
         $fee = new ServMFee();
         $fee->ServID = $servOff->id;
         $fee->FeeID = $request->addmatfee;
@@ -155,7 +156,7 @@ class ServicesOfferedController extends Controller
         $total->save();
 
        
-        
+        // dd($total);
         // return redirect()->route('serviceOff.index');
         return Response($servOff);
 
@@ -292,7 +293,14 @@ class ServicesOfferedController extends Controller
         $servee = ServicesOffered::find($serveID);
         return Response($servee);
     }
-
+    public function show($id)
+    {
+        $serv = ServicesOffered::where('id',$id)
+        ->where('status',1)
+        ->where('todelete',1)
+        ->get();
+       return Response($serv);
+    }
     public function update(Request $request, $serveID)
     {
         // $servename = ServicesOffered::where('ServiceOffName', '=', $request->ServiceOffName )

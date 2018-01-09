@@ -37,6 +37,9 @@
             </li>
         </ul>
     </li>
+    <li >
+        <a href="{{ route('pmutilities.index') }}"><i class="gi gi-adjust sidebar-nav-icon"></i>Manage Contract</a>
+    </li>
    <!--  <li class="sidebar-header">
        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="hi hi-list"></i></a></span>
         <span class="sidebar-header-title">Lists</span>
@@ -44,7 +47,7 @@
    <li >
        <a href=""><i class="fa fa-cog sidebar-nav-icon"></i>Client List</a>
    </li> -->
-    <li class="sidebar-header">
+   <!--  <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="hi hi-tasks"></i></a></span>
          <span class="sidebar-header-title">Queries & Reports</span>
      </li>
@@ -53,7 +56,7 @@
     </li>
     <li >
         <a href=""><i class="fa fa-files-o sidebar-nav-icon"></i>Status Report</a>
-    </li>
+    </li> -->
     <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="fa fa-child"></i></a></span>
          <span class="sidebar-header-title">User Account</span>

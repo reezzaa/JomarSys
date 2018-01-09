@@ -117,6 +117,8 @@ Route::prefix('bd')->group(function(){
 	//billing and Collection
 	Route::resource('/billingcollection','BD\BillingCollectionController');
 	Route::get('/readByAjax1','BD\BillingCollectionController@readByAjax');
+	Route::get('/readByAjax2','BD\BillingCollectionController@readByAjax2');
+
 
 
 });
@@ -214,6 +216,8 @@ Route::prefix('o')->group(function(){
 	Route::get('/getMatClass/{id}','O\MaterialController@getMatClass');
 	Route::get('/getMatUOM/{id}','O\MaterialController@getMatUOM');
 	Route::get('/getMatSymbol/{id}','O\MaterialController@getMatSymbol');
+	// Route::get('/findClass','O\MaterialController@findClass');
+
 	//EquipmentType
 	Route::resource('/equiptype','O\EquipTypeController');
 	Route::get('/readByAjax3','O\EquipTypeController@readByAjax');
@@ -224,6 +228,14 @@ Route::prefix('o')->group(function(){
 	Route::get('/readByAjax4','O\EquipmentController@readByAjax');
 	Route::put('/equipment/checkbox/{id}', 'O\EquipmentController@checkbox');
 	Route::put('/equipment/{id}/delete ','O\EquipmentController@delete');
+	//Price Adjustment
+	Route::resource('/price','O\PriceController');
+	Route::get('/readByAjax16','O\PriceController@readByAjax');
+	// Route::get('/readByAjax17','O\PriceController@readByAjax1');
+	Route::get('/readByAjax18','O\PriceController@readByAjax2');
+	// Route::put('/price/spec/{id}','O\PriceController@spec_update');
+	Route::put('/price/equip/{id}','O\PriceController@equip_update');
+
 	//Services Offered
 	Route::resource('/serviceOff','O\ServicesOfferedController');
 	Route::get('/readByAjax5','O\ServicesOfferedController@readByAjax');
@@ -244,6 +256,7 @@ Route::prefix('o')->group(function(){
 	Route::get('/serviceOff/getMatPrice/{id}','O\ServicesOfferedController@getMatPrice');
 	Route::get('/serviceOff/getEPrice/{id}','O\ServicesOfferedController@getEPrice');
 	Route::get('/serviceOff/findFee/{id}','O\ServicesOfferedController@findFee');
+	Route::get('/serviceOff/fetch/{id}','O\ServicesOfferedController@findFee');
 
 	// Route::get('/serviceOff/findWorkerRate/{id}','O\ServicesOfferedController@findWorkerRate');
 	//Bank
@@ -263,6 +276,8 @@ Route::prefix('o')->group(function(){
 	Route::get('/stockadjustment/findPrice/{id}','O\StockController@findPrice')->name('o.stockadjustment.findPrice');
 	Route::post('/stockadjustment/{id}/storeThis',['as'=>'stockadjustment.storeThis','uses'=>'O\StockController@storeThis']);
 	Route::post('/stockadjustment/{id}/storeThat',['as'=>'stockadjustment.storeThat','uses'=>'O\StockController@storeThat']);
+	Route::post('/stockadjustment/printStockCard','O\StockController@printStockCard')->name('o.stockadjustment.printStockCard');
+
 
 });
 

@@ -3,12 +3,15 @@
 <script>
    function readByAjax()
   {
+    /////////////////stop top loading//////////
+      NProgress.start();
+      ///////////////////////////////////////////
       $.ajax({
         type : 'get',
         url  : "{{ url('bd/readByAjax1') }}",
         dataType : 'html',
         success:function(data)
-        {
+        { 
             $('#here').html(data);
               /////////////////stop top loading//////////
               NProgress.done();
@@ -16,7 +19,26 @@
         }
       })
   };
- readByAjax();
+
+  function readByAjax2()
+  {
+     /////////////////stop top loading//////////
+      NProgress.start();
+      ///////////////////////////////////////////
+      $.ajax({
+        type : 'get',
+        url  : "{{ url('bd/readByAjax2') }}",
+        dataType : 'html',
+        success:function(data)
+        { 
+            $('#here').html(data);
+              /////////////////stop top loading//////////
+              NProgress.done();
+              ///////////////////////////////////////////
+        }
+      })
+  };
+  
 </script>
 @endsection
 @section('sidebar')
@@ -56,8 +78,8 @@
       
       <div class="block" >
         <ul class="nav nav-pills">
-              <li><a href="javascript:void(0)">View By Contract</a></li>
-              <li><a href="javascript:void(0)">View By Client</a></li>
+              <li><a onclick="readByAjax()"><b>View By Contract</b></a></li>
+              <li><a onclick="readByAjax2()"><b>View By Client</b></a></li>
             </ul>
            <div class="block" id="here">
              
@@ -81,6 +103,7 @@
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
+ readByAjax();
       
     });
   </script>

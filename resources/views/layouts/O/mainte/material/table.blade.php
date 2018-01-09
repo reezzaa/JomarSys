@@ -46,11 +46,11 @@
           </td>
         <td>
           <div class="text-center">
-            <button id="view_supp" class="btn btn-alt btn-info view_supp" value = "{{$u->id}}" data-toggle="tooltip" data-placement="top" data-original-title="View"><span class="gi gi-eye_open"></span>
+            <button id="view_supp" class="btn btn-alt btn-info view_supp" value = "{{$u->matID}}" data-toggle="tooltip" data-placement="top" data-original-title="View"><span class="gi gi-eye_open"></span>
             </button>
-            <button id="edit_supp" class="btn btn-alt btn-warning edit_supp" value = "{{$u->id}}" data-toggle="tooltip" data-placement="top" data-original-title="Edit"><span class="gi gi-pencil"></span>
+            <button id="edit_supp" class="btn btn-alt btn-warning edit_supp" value = "{{$u->matID}}" data-toggle="tooltip" data-placement="top" data-original-title="Edit"><span class="gi gi-pencil"></span>
             </button>
-            <button id="del_supp" class="btn btn-alt btn-danger del_supp" value="{{$u->id}}" data-toggle="tooltip" data-placement="top" data-original-title="Delete"> <span class="gi gi-bin"></span>
+            <button id="del_supp" class="btn btn-alt btn-danger del_supp" value="{{$u->matID}}" data-toggle="tooltip" data-placement="top" data-original-title="Delete"> <span class="gi gi-bin"></span>
             </button>
           </div>
       </td>
@@ -71,8 +71,15 @@
         </div>
 
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6 " id="header">
+
           </div>
+          <div class="col-md-6 " id="right">
+
+          </div>
+        </div>
+        <div class="row" id="detail">
+
         </div>
         
         <div id="clearfix"></div>
@@ -81,7 +88,7 @@
   </div>
 </div> 
 
-<div id="editmat_modal" class="modal fade editmat_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div id="edit_modal" class="modal fade editmat_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="block">
@@ -91,7 +98,7 @@
           </div>
           <h3 class="themed-background" style="color:white;"><strong id="nameheader">Edit Material</strong></h3>
         </div>
-        {!! Form::open(['url'=>'material', 'method'=>'PATCH', 'id'=>'form-validation', 'class' => 'form-horizontal']) !!}
+        {!! Form::open(['url'=>'material', 'method'=>'PUT', 'id'=>'form-validation', 'class' => 'form-horizontal']) !!}
           @include('layouts.O.mainte.material.formedit')
         {!! Form::close() !!}
         <div id="clearfix"></div>

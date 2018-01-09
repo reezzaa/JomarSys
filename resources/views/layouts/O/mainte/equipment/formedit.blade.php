@@ -71,5 +71,5 @@
 </div>
 <div class="pull-right">
   <button id="cancel" type="button" class="btn btn-warning" data-dismiss="modal"><span class="gi gi-remove_2"></span> Cancel</button>
-  <button type="submit" class="btn btn-primary"><span class="gi gi-plus"></span> Add</button>
+  <button type="submit" class="btn btn-primary"><span class="gi gi-pen"></span> Save Changes</button>
 </div>

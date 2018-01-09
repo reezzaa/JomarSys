@@ -2,11 +2,11 @@
   <div class="col-md-4">
     <div class="form-group">
       <div>
-        <label for="mattype">Type</label> <span class="text-danger">*</span>
-        <select id="mattype" onchange="changeType(this.value)" name="mattype" style="width: 250px;" class="select-chosen form-control" data-placeholder="Select Type">
+        <label for="mattypes">Type</label> <span class="text-danger">*</span>
+        <select id="mattypes" onchange="changeType(this.value)" name="mattypes" style="width: 250px;" class="form-control" data-placeholder="Select Type">
           <option></option>
-          @foreach($type as $mattype)
-          <option value="{{ $mattype->id }}">{{ $mattype->MatTypeName }}
+          @foreach($type as $mattypes)
+          <option value="{{ $mattypes->id }}">{{ $mattypes->MatTypeName }}
           </option>
           @endforeach
         </select>
@@ -19,14 +19,10 @@
   <div class="col-md-4">
     <div class="form-group">
       <div>
-        <label for="matclass">Classification</label> <span class="text-danger">*</span>
-        <select id="matclass" name="matclass" class="form-control" placeholder=" ">
+        <label for="matclasse">Classification</label> <span class="text-danger">*</span>
+        <select id="matclasse" name="matclasse" class="form-control" placeholder=" ">
           <option></option>
-          @foreach($class as $matclass)
-          <option value="{{ $matclass->MatClassID }}">{{ $matclass->MatClassName }}
-          </option>
-          @endforeach 
-        </select>  
+         </select>  
       </div>
        <span id="duplicates2" class="help-block animation-slideDown">
           Duplicate Material Category Name
@@ -36,8 +32,8 @@
   <div class="col-md-4">
     <div class="form-group">
       <div>
-        <label for="matname" >Material Name</label> <span class="text-danger">*</span>
-        {!! Form::text('matname',null ,['id'=>'matname','placeholder'=>'Material Name', 'class' => 'form-control', 'maxlength'=>'30']) !!}
+        <label for="matnames" >Material Name</label> <span class="text-danger">*</span>
+        {!! Form::text('matnames',null ,['id'=>'matnames','placeholder'=>'Material Name', 'class' => 'form-control', 'maxlength'=>'30']) !!}
       </div>
       <span id="duplicates3" class="help-block animation-slideDown">
           Duplicate Material Category Name
@@ -124,7 +120,7 @@
     <div class="form-group">
       <div>
         <label for="groupuoms">Group UOM</label> <span class="text-danger">*</span>
-        <select id="groupuoms" onchange="changeUOM(this.value)" name="groupuoms" style="width: 250px;" class="select-chosen form-control" data-placeholder="Select Group UOM">
+        <select id="groupuoms" onchange="changeUOM(this.value)" name="groupuoms" style="width: 250px;" class=" form-control" data-placeholder="Select Group UOM">
           <option></option>
           @foreach($guom as $groupuoms)
           <option value="{{ $groupuoms->id }}">{{ $groupuoms->GroupUOMText }}
@@ -143,10 +139,7 @@
         <label for="detailuoms" >Detail UOM</label> <span class="text-danger">*</span>
         <select id="detailuoms" onchange="changeSymbols(this.value)" name="detailuoms" class="form-control" placeholder=" ">
           <option></option>
-          @foreach($duom as $detailuoms)
-          <option value="{{ $detailuoms->id }}">{{ $detailuoms->DetailUOMText }}
-          </option>
-          @endforeach  
+         
         </select>  
           <span id="duplicates6" class="help-block animation-slideDown">
           Duplicate Material Classification
@@ -163,10 +156,10 @@
     </div>
   </div>
 </div>
-
+<input type="hidden" id="matID" name="matID">
 <div class="row">
-  <div class="col-md-3 col-md-offset-9">
+  <div class="pull-right">
     <button id="cancel" type="button" class="btn btn-warning" data-dismiss="modal"><span class="gi gi-remove_2"></span> Cancel</button>
-    <button type="submit" class="btn btn-primary"><span class="gi gi-plus"></span> Add </button>
+    <button type="submit" class="btn btn-primary"><span class="gi gi-pen"></span> Save Changes </button>
   </div>
 </div>

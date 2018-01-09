@@ -21,6 +21,8 @@
       function changeType(val)
       {
         $('#matclass').empty();
+        // $('#matclasse').empty();
+
         var id;
         var opt;
         var a;
@@ -75,6 +77,8 @@
           NProgress.start();
           ///////////////////////////////////////////
           $('#symbol').val('');
+          $('#symbols').val('');
+
           var a4;
           $.get('getMatSymbol/' + val, function (data) {
           if(data.length != 0)
@@ -82,6 +86,8 @@
             for(a4=0;a4<data.length;a4++)
             {
               $('#symbol').val(data[a4].UOMUnitSymbol);
+              $('#symbols').val(data[a4].UOMUnitSymbol);
+
             }
           }
           /////////////////stop top loading//////////
@@ -301,9 +307,19 @@
         }
         e.stopPropagation();
       });
-
+    
+        
       //get edit data
       $(this).on('click','.edit_supp', function(){
+          //for Matclassification and uom edit
+      var newSelectm = document.getElementById("matclasse");
+          $('#matclasse').empty();
+          var option='';
+          var i='';
+      var newSelectg = document.getElementById("detailuoms");
+          $('#detailuoms').empty();
+          var option2='';
+          var i2='';
           $('span#duplicates').hide();
           $('span#duplicates2').hide();
           $('span#duplicates3').hide();
@@ -312,20 +328,43 @@
           $('span#duplicates6').hide();
           var classID = $(this).val();
           id = classID;
+          
           $.get(url + '/' + classID + '/edit', function (data) {
-            $('#matnames').val(data.MaterialName);
-            $('#matcats > option[value="'+ data.MatClassID +'"]').prop('selected', true);
-            $('#detailuoms > option[value="'+ data.MatUOM +'"]').prop('selected', true);            
-            $('#matbrands').val(data.MaterialBrand);
-            $('#matsizes').val(MaterialSize);
-            $('#matcolors').val(MaterialColor);
-            $('#matdimens').val(MaterialDimension);
-            $('#matprices').val(MaterialUnitPrice);
-            selfName=$('#matnames').val();
-            className=$('#matcats').val();
-            selfPrice=$('#matprices').val();
-            selfuom=$('#detailuoms').val();
-                $('#editmat_modal').modal('show');
+            for(a=0;a<data.length;a++)
+              {
+                $.get('getMatClass/'+data[a].mattypeID,function(data){
+                    for (i = 0; i<data.length; i++) {
+                       option = new Option(data[i].MatClassName,data[i].id);
+                        newSelectm.appendChild(option);
+                    }
+                  })   
+                  $.get('getMatUOM/'+data[a].groupID,function(data){
+                    for (i2 = 0; i2<data.length; i2++) {
+                       option2 = new Option(data[i2].DetailUOMText,data[i2].id);
+                        newSelectg.appendChild(option2);
+                    }
+                  })    
+                $('#matnames').val(data[a].MaterialName);
+                $('#mattypes > option[value="'+ data[a].mattypeID +'"]').prop('selected', true);
+                $('#matclasse > option[value="'+ data[a].MatClassID +'"]').prop('selected', true);
+                $('#groupuoms > option[value="'+ data[a].groupID +'"]').prop('selected', true);
+                $('#detailuoms > option[value="'+ data[a].MatUOM +'"]').prop('selected', true);            
+                $('#matbrands').val(data[a].MaterialBrand);
+                $('#matsizes').val(data[a].MaterialSize);
+                $('#matcolors').val(data[a].MaterialColor);
+                $('#matdimens').val(data[a].MaterialDimension);
+                $('#matprices').val(data[a].MaterialUnitPrice);
+                $('#matID').val(data[a].matID);
+                selfName=$('#matnames').val();
+                className=$('#matclasse').val();
+                selfPrice=$('#matprices').val();
+                selfuom=$('#detailuoms').val();
+                changeSymbol(data[a].MatUOM);
+                // alert(className);
+
+                  }
+           
+                $('#edit_modal').modal('show');
             })
       });
 
@@ -338,7 +377,7 @@
           var formData = {
                 id: $('#matID').val(),
                 MaterialName: $('#matnames').val(),
-                MatClassID : $('#matcats').val(),
+                MatClassID : $('#matclasse').val(),
                 MatUOM: $('#detailuoms').val(),
                 MaterialBrand: $('#matbrands').val(),
                 MaterialSize: $('#matsizes').val(),
@@ -346,7 +385,7 @@
                 MaterialDimension: $('#matdimens').val(),
                 MaterialUnitPrice: $('#matprices').val()
           }
-                if(selfName == $('#matnames').val() && className == $('#matcats').val() && selfPrice == $('#prices').val() && selfuom == $('#detailuoms').val())
+                if(selfName == $('#matnames').val() && className == $('#matclasse').val() && selfPrice == $('#prices').val() && selfuom == $('#detailuoms').val())
                 {
                   swal("Info", "Same Required Material Information", "info");
                 }
@@ -372,7 +411,44 @@
               
            e.stopPropagation();
         }); 
+      $(this).on('click','.view_supp',function()
+      {
+        var classID = $(this).val();
+          var a,b=0;
 
+         /////////////////top loading//////////
+          NProgress.start();
+          /////////////////////////////////////
+          $.ajax({
+          type : 'get',
+          url  : url+'/'+classID+ '/edit',
+          dataType: 'json',
+          success:function(data){
+            for(a=0;a<1;a++)
+            {
+                document.getElementById("nameheader").innerHTML += '<strong>'+data[a].MaterialName+'</strong>';
+                $('#view_modal').modal('show');
+                
+
+            }
+            for (a=0;a<data.length;a++) 
+            {
+              document.getElementById("right").innerHTML += '<ol> <strong>  Price: </strong>  ₱ '+data[a].MaterialUnitPrice+'</ol>';
+             document.getElementById("header").innerHTML += '<ol> <strong>  Type: </strong>'+data[a].MatTypeName+'</ol><ol><strong>  Classification: </strong>'+data[a].MatClassName+'</ol><br><ol><strong>  Unit of Measurement: </strong>'+data[a].DetailUOMText+'</ol>';
+              document.getElementById("detail").innerHTML += ' <hr> <ol><h4><strong>Specifications</strong></h4><br> <ol> <strong>Brand: </strong>'+data[a].MaterialBrand+'</ol><ol> <strong>Size: </strong>'+data[a].MaterialSize+'</ol><ol> <strong>Color: </strong>'+data[a].MaterialColor+'</ol><ol> <strong>Dimension: </strong>'+data[a].MaterialDimension+'</ol>';
+            };
+             
+          }
+          });
+
+           /////////////////stop top loading//////////
+            NProgress.done();
+            ///////////////////////////////////////////
+          $('#nameheader').empty();
+          $('#right').empty();
+          $('#header').empty();
+          $('#detail').empty();
+      });
       //status listen edit
       $(this).on('change','#status',function(e){ 
        e.preventDefault(); 

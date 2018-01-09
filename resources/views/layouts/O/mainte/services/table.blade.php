@@ -51,6 +51,34 @@
   </tbody>
 </table>
 <div>
+  <div id="view_modal" class="modal fade view_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="block">
+        <div class="block-title themed-background">
+          <div class="block-options pull-right">
+              <a href="javascript:void(0)" class="btn btn btn-default close" data-dismiss="modal"><i class="fa fa-times"></i></a>
+          </div>
+          <h3 class="themed-background" style="color:white;"><strong id="nameheader"></strong></h3>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 " id="header">
+
+          </div>
+          <div class="col-md-6 " id="right">
+
+          </div>
+        </div>
+        <div class="row" id="detail">
+
+        </div>
+        
+        <div id="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div> 
    <div id="edit_modal" class="modal fade edit-modal" tabindex="-1" role="dialog" aria-labelledby="EditSupplierModal" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-md">
       <div class="modal-content">

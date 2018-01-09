@@ -20,11 +20,16 @@ class BillingCollectionController extends Controller
 
     public function readByAjax()
     {
-        return view('layouts.BD.transact.billing.list');
+        return view('layouts.BD.transact.billing.table');
+    }
+    public function readByAjax2()
+    {
+        return view('layouts.BD.transact.billing.table2');
     }
     public function create()
     {
-        //
+        return view('layouts.BD.transact.billing.byContract.index');
+        
     }
 
   
