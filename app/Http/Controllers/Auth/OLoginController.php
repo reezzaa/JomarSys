@@ -35,7 +35,7 @@ class OLoginController extends Controller
     public function getLogout()
     {
         $this->middleware('guest:operations')->logout();
-        // Auth::guard('operations')->logout();
+        Auth::guard('operations')->logout();
         \Session::flash('flash_logout_success','Success!');
         return redirect()->intended(route('o.login'));
     }

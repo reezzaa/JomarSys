@@ -125,6 +125,7 @@ Route::prefix('bd')->group(function(){
 
 Route::prefix('o')->group(function(){
 	Route::get('/logout','Auth\OLoginController@getLogout')->name('o.logout');
+	Route::post('/logout','Auth\OLoginController@getLogout')->name('o.logout');
 	Route::get('/login','Auth\OLoginController@showOLogin')->name('o.login');
 	Route::post('/login','Auth\OLoginController@Ologin')->name('o.login.submit');
 	Route::get('/','O\OController@index')->name('o.home');
