@@ -17,12 +17,6 @@ SET migratedir="%~dp0\database\migrations"
 
 SET modeldir="%~dp0\app\Models"
 
-SET gitdir=C:\Program Files\Git\bin
-SET gitx="%gitdir%\git.exe"
-IF NOT EXIST "C:\Program Files\Git\bin" (
-    SET gitdir="C:\Program Files (x86)\Git\bin"
-) 
-
 SET wipescript="wipeinit.sql"
 SET nightlyscript=""
 
