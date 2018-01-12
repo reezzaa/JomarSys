@@ -26,10 +26,11 @@
     22 => 'Collective\\Html\\HtmlServiceProvider',
     23 => 'Barryvdh\\DomPDF\\ServiceProvider',
     24 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    25 => 'App\\Providers\\AppServiceProvider',
-    26 => 'App\\Providers\\AuthServiceProvider',
-    27 => 'App\\Providers\\EventServiceProvider',
-    28 => 'App\\Providers\\RouteServiceProvider',
+    25 => 'Reliese\\Coders\\CodersServiceProvider',
+    26 => 'App\\Providers\\AppServiceProvider',
+    27 => 'App\\Providers\\AuthServiceProvider',
+    28 => 'App\\Providers\\EventServiceProvider',
+    29 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -145,6 +146,7 @@
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'Reliese\\Coders\\Model\\Factory' => 'Reliese\\Coders\\CodersServiceProvider',
   ),
   'when' => 
   array (
@@ -188,6 +190,9 @@
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'Reliese\\Coders\\CodersServiceProvider' => 
     array (
     ),
   ),
