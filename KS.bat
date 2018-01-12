@@ -93,7 +93,7 @@ IF %1==build (
         ::ECHO "Wiping models..."
         ::DEL %modeldir%\*.php
         ECHO "Writing new models..."
-        %PHPX% artisan code:models --schema=dbbarangay
+        %PHPX% artisan code:models --schema=mydb
         GOTO COMOK
     )
 
@@ -108,7 +108,7 @@ IF %1==build (
     IF %2==database (
         ECHO "Reloading database..."
         %mariadbx% -uroot -h127.0.0.1 --port=3306 < %dbsetupdir%\%wipescript%
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 dbBarangay < %dbdumpdir%\dbbaranggay_nightly.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 mydb < %dbdumpdir%\mydb_nightly.sql
 
         GOTO COMOK
     )
@@ -128,7 +128,7 @@ IF %1==build (
     IF %2==sysback (
         ECHO "Reloading database..."
         %mariadbx% -uroot -h127.0.0.1 --port=3306 < %dbsetupdir%\%wipescript%
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 dbBarangay < %dbdumpdir%\dbbaranggay_nightly.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 mydb < %dbdumpdir%\mydb_nightly.sql
 
         ECHO "Wiping migrations folder..."
         DEL %migratedir%\*.php
@@ -138,7 +138,7 @@ IF %1==build (
         ::ECHO "Wiping models..."
         ::DEL %modeldir%\*.php
         ECHO "Writing new models..."
-        %PHPX% artisan code:models --schema=dbbarangay
+        %PHPX% artisan code:models --schema=mydb
 
         GOTO COMOK
     )
@@ -148,21 +148,21 @@ IF %1==build (
 IF %1==database (
     IF %2==dump (
         ECHO "Dumping database..."
-        %mariadumpx% -uroot -h127.0.0.1 --port=3306 --events --routines --triggers dbBarangay > %dbdumpdir%\dbbaranggay_nightly.sql
+        %mariadumpx% -uroot -h127.0.0.1 --port=3306 --events --routines --triggers mydb > %dbdumpdir%\mydb_nightly.sql
 
         GOTO COMOK
     )
 
     IF %2==structure (
         ECHO "Dumping database structure..."
-        %mariadumpx% -uroot -h127.0.0.1 --port=3306 --no-data dbBarangay > %dbdumpdir%\dbbaranggay_struct.sql
+        %mariadumpx% -uroot -h127.0.0.1 --port=3306 --no-data mydb > %dbdumpdir%\mydb_struct.sql
 
         GOTO COMOK
     )
 
     IF %2==data (
         ECHO "Dumping database data..."
-        %mariadumpx% -uroot -h127.0.0.1 --port=3306 --no-create-info --skip-triggers dbBarangay > %dbdumpdir%\dbbaranggay_data.sql
+        %mariadumpx% -uroot -h127.0.0.1 --port=3306 --no-create-info --skip-triggers mydb > %dbdumpdir%\mydb_data.sql
 
         GOTO COMOK
     )
@@ -176,7 +176,7 @@ IF %1==database (
 
     IF %2==rest (
         ECHO "Restoring database..."
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 dbBarangay < %dbdumpdir%\dbbaranggay_nightly.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 mydb < %dbdumpdir%\mydb_nightly.sql
 
         GOTO COMOK
     )
@@ -196,21 +196,21 @@ IF %1==database (
 
     IF %2==executeinit (
         ECHO "Initializing database data..."
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 --no-data dbBarangay < %dbsetupdir%\initscript.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 --no-data mydb < %dbsetupdir%\initscript.sql
 
         GOTO COMOK
     )
 
     IF %2==executestructure (
         ECHO "Restoring database structure..."
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 dbBarangay < %dbdumpdir%\dbbaranggay_struct.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 mydb < %dbdumpdir%\mydb_struct.sql
 
         GOTO COMOK
     )
 
     IF %2==executedata (
         ECHO "Restoring database data..."
-        %mariadbx% -uroot -h127.0.0.1 --port=3306 dbBarangay < %dbdumpdir%\dbbaranggay_data.sql
+        %mariadbx% -uroot -h127.0.0.1 --port=3306 mydb < %dbdumpdir%\mydb_data.sql
 
         GOTO COMOK
     )

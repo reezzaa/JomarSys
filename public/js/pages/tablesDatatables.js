@@ -91,9 +91,20 @@ var TablesDatatables = function() {
                     "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
                 });
                 //Discount
-                $('#discount-datatable').dataTable({
+                $('#price-datatable').dataTable({
                     "aaSorting": [ [0,'asc'] ],
-                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 2,3 ] } ],
+                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 2 ] } ],
+                    "iDisplayLength": 10,
+                    "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
+                });
+                $('#price2-datatable').dataTable({
+                    "aaSorting": [ [0,'asc'] ],
+                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 2 ] } ],
+                    "iDisplayLength": 10,
+                    "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
+                });$('#price3-datatable').dataTable({
+                    "aaSorting": [ [0,'asc'] ],
+                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 2 ] } ],
                     "iDisplayLength": 10,
                     "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
                 });
@@ -143,18 +154,20 @@ var TablesDatatables = function() {
                 "iDisplayLength": 10,
                 "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
             });
+             
              $('#progress-datatable').dataTable({
                 "aaSorting": [ [0,'asc'] ],
                 "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 6 ] } ],
                 "iDisplayLength": 10,
                 "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
             });
-             $('#indbill-datatable').dataTable({
-                    "aaSorting": [ [1,'asc'] ],
-                    "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 0 ] } ],
-                    "iDisplayLength": 10,
-                    "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
-                    });
+            $('#billbycontract-datatable').dataTable({
+                "aaSorting": [ [1,'asc'] ],
+                "aoColumnDefs": [ { "bSearchable": false, "bSortable": false, "aTargets": [ 0 ] } ],
+                "iDisplayLength": 10,
+                "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
+            });
+            
 
 
              //Queries
