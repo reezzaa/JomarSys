@@ -54,8 +54,12 @@
             top:25%;
             outline: none;
             }
-            #editTruck_modal {
-            top:15%;
+            #edit_spec_modal {
+            top:25%;
+            outline: none;
+            }
+            #edit_equip_modal {
+            top:25%;
             outline: none;
             }
             #del_modal {

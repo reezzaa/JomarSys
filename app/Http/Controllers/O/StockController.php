@@ -11,6 +11,7 @@ use Config;
 use Response;
 use App\StockCard;
 use App\Stocks;
+use PDF;
 
 class StockController extends Controller
 {
@@ -125,7 +126,8 @@ class StockController extends Controller
         ->join('tbldetailuom','tbldetailuom.id','tblmaterial.MatUOM')
         ->where('tblmaterial.id',$id)
         ->select('tblstockcard.*','tblmaterial.MaterialName','tbldetailuom.UOMUnitSymbol')
-        ->orderby('tblstockcard.date')
+        ->orderby('tblstockcard.date','DESC')
+        ->limit(15)
         ->get();
         foreach ($mate as $key ) {
              $key->cost=number_format($key->cost,2);
@@ -143,5 +145,38 @@ class StockController extends Controller
         return response::json($mate);
     }
 
-  
+    public function printStockCard(Request $request)
+    {
+        // $company = DB::table('tblCompanyUtil')
+        // ->select('tblCompanyUtil.*')
+        // ->first();
+        $from=$request->datStart;
+        $to=$request->datEnd;
+
+        $matname = DB::table('tblmaterial')
+        ->join('tblstockcard','tblstockcard.MatID','tblmaterial.id')
+        ->where('tblmaterial.id',$request->myId)
+        ->first();
+
+       $mate=DB::table('tblmaterial')
+        ->join('tblstockcard','tblstockcard.MatID','tblmaterial.id')
+        ->join('tbldetailuom','tbldetailuom.id','tblmaterial.MatUOM')
+        ->where('tblmaterial.id',$request->myId)
+        ->whereBetween('tblstockcard.date',[$request->datStart,$request->datEnd])
+        ->select('tblstockcard.*','tblmaterial.MaterialName','tbldetailuom.UOMUnitSymbol')
+        ->orderby('tblstockcard.date','DESC')
+        ->get();
+
+       foreach ($mate as $key ) {
+             $key->cost=number_format($key->cost,2);
+             $key->totalcost=number_format($key->totalcost,2);
+            }
+
+        $pdf = PDF::loadView('layouts.O.transact.stockadjustment.print',compact('mate','matname','from','to'))->setPaper('letter','portrait');      
+        
+        $pdfName="myPDF.pdf";
+        // $location=public_path("docs/$pdfName");
+        // $pdf->save($location); 
+        return $pdf->stream(); 
+  }
 }

@@ -276,6 +276,7 @@
         $(this).on('click','#view',function(){
            var classID = $(this).val();
           var a,b=0;
+          $('#myId').val(classID);
 
          /////////////////top loading//////////
           NProgress.start();

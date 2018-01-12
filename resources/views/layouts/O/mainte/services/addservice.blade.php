@@ -701,7 +701,6 @@ function mcheck()
         $('#addmatfee_modal').modal('hide');
 
       });
-       alert()
 
 
        //insert data
@@ -732,7 +731,7 @@ function mcheck()
 
             }
             // var ddata = $('#frm-insert').serialize();
-            console.log(ddata);
+            // console.log(ddata);
             $.ajax({
               type : 'post',
               data : ddata,

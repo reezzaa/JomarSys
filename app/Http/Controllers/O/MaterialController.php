@@ -13,6 +13,7 @@ use App\MaterialPrice;
 use App\GroupUOM;
 use App\DetailUOM;
 use Response;
+use DB;
 class MaterialController extends Controller
 {
         public function __construct()
@@ -29,7 +30,7 @@ class MaterialController extends Controller
         $material = Material::join('tblMaterialClass', 'tblMaterial.MatClassID', 'tblMaterialClass.id')
             ->join('tblMaterialType', 'tblMaterialClass.MatTypeID', 'tblMaterialType.id')
             ->join('tblDetailUOM', 'tblMaterial.MatUOM', 'tblDetailUOM.id')
-            ->select('tblMaterial.*','tblMaterialClass.MatClassName','tblDetailUOM.*','tblMaterialType.*')
+            ->select('tblMaterial.id as matID','tblMaterial.*','tblMaterialClass.MatClassName','tblDetailUOM.*','tblMaterialType.*')
             ->orderby('tblMaterial.id')
             ->where('tblMaterial.todelete','=',1)
             ->get();
@@ -48,13 +49,13 @@ class MaterialController extends Controller
 
     public function getMatClass($id)
     {
-        $matcat = MaterialClass::where('status',1)->where('todelete',1)->where('MatTypeID',$id)->get();
+        $matcat = MaterialClass::where('status',1)->where('todelete',1)->where('MatTypeID',$id)->orderby('id')->get();
         
         return Response($matcat);
     }
     public function getMatUOM($id)
     {
-        $detailuom = DetailUOM::where('GroupUOMID',$id)->get();
+        $detailuom = DetailUOM::where('GroupUOMID',$id)->orderby('id')->get();
         
         return Response($detailuom);
     }
@@ -92,9 +93,26 @@ class MaterialController extends Controller
 
     public function edit($classID)
     {
-        $matclasse = Material::find($classID);
-        return Response($matclasse);
+        $material = Material::join('tblMaterialClass', 'tblMaterial.MatClassID', 'tblMaterialClass.id')
+            ->join('tblMaterialType', 'tblMaterialClass.MatTypeID', 'tblMaterialType.id')
+            ->join('tblDetailUOM', 'tblMaterial.MatUOM', 'tblDetailUOM.id')
+            ->join('tblGroupUOM','tblGroupUOM.id','tblDetailUOM.GroupUOMID')
+            ->select('tblMaterial.id as matID','tblMaterial.*','tblMaterialClass.MatClassName','tblMaterialType.id as mattypeID','tblMaterialType.MatTypeName','tblGroupUOM.id as groupID','tblGroupUOM.GroupUOMText','tblDetailUOM.DetailUOMText')
+            ->orderby('tblMaterial.id')
+            ->where('tblMaterial.todelete','=',1)
+            ->where('tblMaterial.id',$classID)
+            ->get();
+            // dd($material);
+        return Response($material);
     }
+    // public function findClass()
+    // {
+    //     $class = MaterialClass::where('status','=',1)
+    //     ->where('todelete','=',1)
+    //     ->orderby('id')
+    //     ->get(); 
+    //     return Response($class);
+    // }
 
     public function update(Request $request, $matID)
     {
@@ -112,7 +130,7 @@ class MaterialController extends Controller
             return Response($updmat);
       
     }
-
+   
     public function checkbox($id)
     {
         $mat = Material::find($id);

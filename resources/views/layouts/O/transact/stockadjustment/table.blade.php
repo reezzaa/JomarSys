@@ -41,6 +41,29 @@
                           <a href="javascript:void(0)" class="btn btn btn-default close" data-dismiss="modal"><i class="fa fa-times"></i></a>
                       </div>
                       <h3 class="themed-background" style="color:white;" id="name"></h3></div>
+                
+                   {{ Form::open(['target' => 's_blank','url'=>route('o.stockadjustment.printStockCard')]) }}
+                     <div class="row">
+                       <div class="col-md-9 col-md-offset-1">
+                            <div class="form-group">
+                              <div class="col-md-3">
+                              <label class="control-label text-center">Select Date Range to Print</label> 
+                            </div>
+                                <div class="col-md-9">
+                                   <div class="input-group" data-date-format="yyyy-mm-dd">
+                                      <input type="date" id="datStart" name="datStart" class="form-control text-center " placeholder="From">
+                                      <span class="input-group-addon"><i class="fa fa-angle-right"></i></span>
+                                      <input type="date" id="datEnd" name="datEnd" class="form-control text-center " placeholder="Through">
+                                  </div>
+                               </div>
+                              </div>
+                            </div>
+                       <div class="col-md-2">
+                            <input type="hidden" name="myId" id="myId">
+                          <button type="submit" id="submit"  class="btn btn-default" ><span class="gi gi-print"></span> Print</button>
+                      </div>
+                     </div>
+                   {{ Form::close() }}  <hr>
           <table class="table table-vcenter table-striped table-borderless table-hover" style="font-family: 'Arial'">
             <thead>
               <tr>
@@ -56,7 +79,7 @@
               
             </tbody>
           </table>
-             
+              
         </div>
       </div>
     </div> 

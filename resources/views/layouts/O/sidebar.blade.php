@@ -67,6 +67,9 @@
             <li>
                 <a href="{{ route('bank.index') }}"><i class="fa fa-institution sidebar-nav-icon"></i>Bank</a>
             </li>
+            <!-- <li>
+                <a href=""><i class="fa fa-files-o sidebar-nav-icon"></i>Price Adjustment</a>
+            </li> -->
             <li>
                 <a href="{{ route('serviceOff.index') }}"><i class="gi gi-hand_saw sidebar-nav-icon"></i>Services Offered</a>
             </li>
@@ -95,7 +98,7 @@
     <li >
         <a href=""><i class="fa fa-cog sidebar-nav-icon"></i>Client List</a>
     </li> -->
-    <li class="sidebar-header">
+    <!-- <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="hi hi-tasks"></i></a></span>
          <span class="sidebar-header-title">Queries & Reports</span>
      </li>
@@ -104,7 +107,7 @@
     </li>
     <li>
         <a href=""><i class="fa fa-files-o sidebar-nav-icon"></i>Equipment</i></a>
-    </li>
+    </li> -->
     <li class="sidebar-header">
         <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"><i class="fa fa-child"></i></a></span>
          <span class="sidebar-header-title">User Account</span>

@@ -92,7 +92,7 @@
                           <div class="form-group">
                             <div>
                               <label for="specname">Specialization Name</label> <span class="text-danger">*</span>
-                              <select id="specname" name="specname" style="width: 250px;" onchange="findRPD(this.value)" class="select-chosen" data-placeholder="Select Material">
+                              <select id="specname" name="specname" style="width: 250px;" onchange="findRPD(this.value)" class="select-chosen" data-placeholder="Select Specialization">
                                 <option></option>
                                 <option value=""></option>
                                  @foreach($spec as $spec)
@@ -392,7 +392,7 @@
                           <div class="form-group">
                             <div>
                               <label for="equipname">Equipment Name</label> <span class="text-danger">*</span>
-                              <select id="equipname" name="equipname" onchange="findEPrice(this.value)" style="width: 250px;" class="select-chosen" data-placeholder="Select Material">
+                              <select id="equipname" name="equipname" onchange="findEPrice(this.value)" style="width: 250px;" class="select-chosen" data-placeholder="Select Equipment">
                                 <option></option>
                                 <option value=""></option>
                                 @foreach($equip as $equip)
