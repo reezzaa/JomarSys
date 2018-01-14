@@ -6,8 +6,8 @@ namespace App\Http\Controllers\O;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\MaterialClass;
-use App\MaterialType;
+use App\Materialclass;
+use App\Materialtype;
 use Response;
 class MaterialClassController extends Controller
 {

@@ -1,18 +1,40 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ */
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Reliese\Database\Eloquent\Model as Eloquent;
 
-class Miscellaneous extends Model
+/**
+ * Class Miscellaneous
+ * 
+ * @property int $id
+ * @property string $MiscDesc
+ * @property float $MiscValue
+ * @property int $todelete
+ * @property int $status
+ *
+ * @package App
+ */
+class Miscellaneous extends Eloquent
 {
-    //
-     protected $fillable = [
-      'MiscDesc',
-      'MiscValue',
-      'status',
-      'todelete',
-    ];
-    public $timestamps = false;
-    protected $table = 'tblmiscellaneous';
+	protected $table = 'miscellaneous';
+	public $timestamps = false;
+
+	protected $casts = [
+		'MiscValue' => 'float',
+		'todelete' => 'int',
+		'status' => 'int'
+	];
+
+	protected $fillable = [
+		'MiscDesc',
+		'MiscValue',
+		'todelete',
+		'status'
+	];
 }

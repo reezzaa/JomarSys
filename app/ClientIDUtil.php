@@ -1,15 +1,24 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ */
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Reliese\Database\Eloquent\Model as Eloquent;
 
-class ClientIDUtil extends Model
+/**
+ * Class Clientidutil
+ * 
+ * @property string $strClientIDUtil
+ *
+ * @package App
+ */
+class Clientidutil extends Eloquent
 {
-    protected $fillable = [
-      'strClientIDUtil'
-    ];
-    public $timestamps = false;
-    protected $primaryKey = 'strClientIDUtil';
-    protected $table = 'tblClientIDUtil';
+	protected $primaryKey = 'strClientIDUtil';
+	public $incrementing = false;
+	public $timestamps = false;
 }

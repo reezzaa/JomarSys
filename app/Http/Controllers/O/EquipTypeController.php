@@ -6,7 +6,7 @@ namespace App\Http\Controllers\O;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\EquipType;
+use App\Equiptype;
 use Response;
 class EquipTypeController extends Controller
 {

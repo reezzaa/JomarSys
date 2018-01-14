@@ -6,12 +6,12 @@ namespace App\Http\Controllers\O;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\MaterialClass;
-use App\MaterialType;
+use App\Materialclass;
+use App\Materialtype;
 use App\Material;
-use App\MaterialPrice;
-use App\GroupUOM;
-use App\DetailUOM;
+use App\Materialprice;
+use App\Groupuom;
+use App\Detailuom;
 use Response;
 use DB;
 class MaterialController extends Controller

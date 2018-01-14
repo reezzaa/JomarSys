@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Employee;
 use App\Specialization;
-use App\EmpSpec;
+use App\Empspec;
 use Response;
 class EmpSpecController extends Controller
 {

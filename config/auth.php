@@ -98,15 +98,15 @@ return [
         ],
          'projectmanager' => [
             'driver' => 'eloquent',
-            'model' => App\ProjectManager::class,
+            'model' => App\Auth\ProjectManager::class,
         ],
         'budgetdepartment' => [
             'driver' => 'eloquent',
-            'model' => App\BudgetDepartment::class,
+            'model' => App\Auth\BudgetDepartment::class,
         ],
         'operations' => [
             'driver' => 'eloquent',
-            'model' => App\Operations::class,
+            'model' => App\Auth\Operations::class,
         ],
 
 

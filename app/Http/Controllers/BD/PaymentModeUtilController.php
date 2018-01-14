@@ -4,7 +4,7 @@
 namespace App\Http\Controllers\BD;
 use App\Http\Controllers\Controller;
 
-use App\PaymentMode;
+use App\Paymentmode;
 use Response;
 use Illuminate\Http\Request;
 
@@ -17,19 +17,19 @@ class PaymentModeUtilController extends Controller
     }
     public function index()
     {
-        $mode = PaymentMode::where('todelete','=',1)->get();
+        $mode = Paymentmode::where('todelete','=',1)->get();
         return view('layouts.BD.utilities.paymentmode.paymentmode',compact('mode'));
     }
     
     public function store(Request $request)
     {
         //
-         $modestore = PaymentMode::where('ModeValue', $request->value )
+         $modestore = Paymentmode::where('ModeValue', $request->value )
             ->where('todelete','=',1)
             ->get();
         if($modestore->count() == 0)
         {
-            PaymentMode::insert([
+            Paymentmode::insert([
             	'ModeValue'=>$request->value,
                 'todelete'=>1,
                 'status'=>1
@@ -40,14 +40,14 @@ class PaymentModeUtilController extends Controller
     public function edit($id)
     {
         //
-        $pfedit = PaymentMode::find($id);
+        $pfedit = Paymentmode::find($id);
         return Response($pfedit);
     }
 
    public function update(Request $request, $id)
     {
         //
-        $updclass = PaymentMode::find($id);
+        $updclass = Paymentmode::find($id);
             $updclass->ModeValue = $request->ModeValue;
             $updclass->save();
             return Response($updclass);
@@ -55,7 +55,7 @@ class PaymentModeUtilController extends Controller
 
     public function checkbox($id)
     {
-        $matclass = PaymentMode::find($id);
+        $matclass = Paymentmode::find($id);
         if ($matclass->status) {
             $matclass->status=0;
         }
@@ -67,7 +67,7 @@ class PaymentModeUtilController extends Controller
 
     public function delete($id)
     {
-        $matclass = PaymentMode::find($id);
+        $matclass = Paymentmode::find($id);
         $matclass->todelete = 0;
         $matclass->save();
         return Response($matclass);

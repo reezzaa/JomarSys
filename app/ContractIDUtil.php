@@ -1,15 +1,24 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ */
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Reliese\Database\Eloquent\Model as Eloquent;
 
-class ContractIDUtil extends Model
+/**
+ * Class Contractidutil
+ * 
+ * @property string $strContractIDUtil
+ *
+ * @package App
+ */
+class Contractidutil extends Eloquent
 {
-    protected $fillable = [
-      'strContractIDUtil',
-    ];
-    public $timestamps = false;
-    protected $primaryKey = 'strContractIDUtil';
-    protected $table = 'tblContractIDUtil';
+	protected $primaryKey = 'strContractIDUtil';
+	public $incrementing = false;
+	public $timestamps = false;
 }

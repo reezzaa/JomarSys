@@ -9,8 +9,8 @@ use App\Material;
 use Carbon\carbon;
 use Config;
 use Response;
-use App\StockCard;
-use App\Stocks;
+use App\Stockcard;
+use App\Stock;
 use PDF;
 
 class StockController extends Controller

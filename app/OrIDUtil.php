@@ -1,16 +1,24 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ */
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Reliese\Database\Eloquent\Model as Eloquent;
 
-class OrIDUtil extends Model
+/**
+ * Class Oridutil
+ * 
+ * @property string $strOrIDUtil
+ *
+ * @package App
+ */
+class Oridutil extends Eloquent
 {
-    //
-     protected $fillable = [
-      'strOrIDUtil'
-    ];
-    public $timestamps = false;
-    protected $primaryKey = 'strOrIDUtil';
-    protected $table = 'tblOrIDUtil';
+	protected $primaryKey = 'strOrIDUtil';
+	public $incrementing = false;
+	public $timestamps = false;
 }

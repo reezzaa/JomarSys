@@ -1,12 +1,58 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ */
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Reliese\Database\Eloquent\Model as Eloquent;
 
-class StockCard extends Model
+/**
+ * Class Stockcard
+ * 
+ * @property int $MatID
+ * @property float $quantity
+ * @property \Carbon\Carbon $date
+ * @property string $method
+ * @property float $stock
+ * @property float $cost
+ * @property float $totalcost
+ * 
+ * @property \App\Material $material
+ *
+ * @package App
+ */
+class Stockcard extends Eloquent
 {
-    //
-    public $timestamps = false;
-    protected $table = 'tblstockcard';
+	public $incrementing = false;
+	public $timestamps = false;
+
+	protected $casts = [
+		'MatID' => 'int',
+		'quantity' => 'float',
+		'stock' => 'float',
+		'cost' => 'float',
+		'totalcost' => 'float'
+	];
+
+	protected $dates = [
+		'date'
+	];
+
+	protected $fillable = [
+		'MatID',
+		'quantity',
+		'date',
+		'method',
+		'stock',
+		'cost',
+		'totalcost'
+	];
+
+	public function material()
+	{
+		return $this->belongsTo(\App\Material::class, 'MatID');
+	}
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
-use App\Operations;
+use App\Operation;
 use Response;
 class OLoginController extends Controller
 {
@@ -45,7 +45,7 @@ class OLoginController extends Controller
     }
     public function register(Request $request)
     {
-        $var = new Operations();
+        $var = new Operation();
         $var->username = $request->val_username;
         $var->fname = $request->fname;
         $var->mname = $request->mname;
@@ -64,7 +64,7 @@ class OLoginController extends Controller
     }
     public function theme(Request $request, $id)
     {
-        $change = Operations::find($id);
+        $change = Operation::find($id);
         $change->theme= $request->stat;
         $change->save();
 

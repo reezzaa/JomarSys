@@ -1,17 +1,36 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ */
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Reliese\Database\Eloquent\Model as Eloquent;
 
-class Bank extends Model
+/**
+ * Class Bank
+ * 
+ * @property int $id
+ * @property string $BankName
+ * @property int $todelete
+ * @property int $status
+ *
+ * @package App
+ */
+class Bank extends Eloquent
 {
-    //
-    protected $fillable = [
-      'BankName',
-      'todelete',
-      'status'
-    ];
-    public $timestamps = false;
-    protected $table = 'tblbank';
+	public $timestamps = false;
+
+	protected $casts = [
+		'todelete' => 'int',
+		'status' => 'int'
+	];
+
+	protected $fillable = [
+		'BankName',
+		'todelete',
+		'status'
+	];
 }

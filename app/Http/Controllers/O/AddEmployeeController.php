@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Specialization;
 use App\Employee;
-use App\EmpSpec;
+use App\Empspec;
 use Response;
 use DB;
 

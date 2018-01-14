@@ -7,7 +7,7 @@ namespace App\Http\Controllers\O;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Equipment;
-use App\EquipType;
+use App\Equiptype;
 use Response;
 class EquipmentController extends Controller
 {

@@ -1,17 +1,37 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ */
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Reliese\Database\Eloquent\Model as Eloquent;
 
-class PaymentMode extends Model
+/**
+ * Class Paymentmode
+ * 
+ * @property int $id
+ * @property float $ModeValue
+ * @property int $todelete
+ * @property int $status
+ *
+ * @package App
+ */
+class Paymentmode extends Eloquent
 {
-    //
-    protected $fillable = [
-      'ModeValue',
-      'status',
-      'todelete',
-    ];
-    public $timestamps = false;
-    protected $table = 'tblpaymentmode';
+	public $timestamps = false;
+
+	protected $casts = [
+		'ModeValue' => 'float',
+		'todelete' => 'int',
+		'status' => 'int'
+	];
+
+	protected $fillable = [
+		'ModeValue',
+		'todelete',
+		'status'
+	];
 }

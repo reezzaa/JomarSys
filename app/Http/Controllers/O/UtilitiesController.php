@@ -6,12 +6,12 @@ namespace App\Http\Controllers\O;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\CompanyUtil;
-use App\EmployeeIDUtil;
-use App\ClientIDUtil;
-use App\ContractIDUtil;
-use App\InvoiceIDUtil;
-use App\OrIDUtil;
+use App\Companyutil;
+use App\Employeeidutil;
+use App\Clientidutil;
+use App\Contractidutil;
+use App\Invoiceidutil;
+use App\Oridutil;
 
 use DB;
 use Response;

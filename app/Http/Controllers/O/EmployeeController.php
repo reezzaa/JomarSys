@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Employee;
-use App\EmpSpec;
+use App\Empspec;
 use App\Specialization;
 use Response;
 class EmployeeController extends Controller

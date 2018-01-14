@@ -38,7 +38,7 @@ return [
         |
         */
 
-        'namespace' => 'App\Models',
+        'namespace' => 'App',
 
         /*
         |--------------------------------------------------------------------------
@@ -263,6 +263,9 @@ return [
 
         'except' => [
             'migrations',
+            'projectmanager', 
+            'budgetdepartment', 
+            'operations', 
         ],
     ],
 

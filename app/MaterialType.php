@@ -1,16 +1,43 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ */
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Reliese\Database\Eloquent\Model as Eloquent;
 
-class MaterialType extends Model
+/**
+ * Class Materialtype
+ * 
+ * @property int $id
+ * @property string $MatTypeName
+ * @property bool $status
+ * @property bool $todelete
+ * 
+ * @property \Illuminate\Database\Eloquent\Collection $materialclasses
+ *
+ * @package App
+ */
+class Materialtype extends Eloquent
 {
-    protected $fillable = [
-      'MatTypeName',
-      'todelete',
-      'status',
-    ];
-    public $timestamps = false;
-    protected $table = 'tblMaterialType';
+	public $timestamps = false;
+
+	protected $casts = [
+		'status' => 'bool',
+		'todelete' => 'bool'
+	];
+
+	protected $fillable = [
+		'MatTypeName',
+		'status',
+		'todelete'
+	];
+
+	public function materialclasses()
+	{
+		return $this->hasMany(\App\Materialclass::class, 'MatTypeID');
+	}
 }

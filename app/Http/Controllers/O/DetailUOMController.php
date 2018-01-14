@@ -6,8 +6,8 @@ namespace App\Http\Controllers\O;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\GroupUOM;
-use App\DetailUOM;
+use App\Groupuom;
+use App\Detailuom;
 use Response;
 
 class DetailUOMController extends Controller

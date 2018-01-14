@@ -6,7 +6,7 @@ namespace App\Http\Controllers\O;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\GroupUOM;
+use App\Groupuom;
 use Response;
 
 class GroupUOMController extends Controller

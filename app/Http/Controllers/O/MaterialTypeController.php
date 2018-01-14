@@ -6,7 +6,7 @@ namespace App\Http\Controllers\O;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\MaterialType;
+use App\Materialtype;
 use Response;
 
 class MaterialTypeController extends Controller
