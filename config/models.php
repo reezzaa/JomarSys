@@ -262,10 +262,11 @@ return [
         */
 
         'except' => [
-            'migrations',
-            'projectmanager', 
-            'budgetdepartment', 
+            'migrations', 
+            'projectmanagers', 
+            'budgetdepartments', 
             'operations', 
+            'users', 
         ],
     ],
 
