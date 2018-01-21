@@ -41,13 +41,13 @@ LOCK TABLES `banks` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `budgetdepts`
+-- Table structure for table `budgetdepartments`
 --
 
-DROP TABLE IF EXISTS `budgetdepts`;
+DROP TABLE IF EXISTS `budgetdepartments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `budgetdepts` (
+CREATE TABLE `budgetdepartments` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -66,13 +66,13 @@ CREATE TABLE `budgetdepts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `budgetdepts`
+-- Dumping data for table `budgetdepartments`
 --
 
-LOCK TABLES `budgetdepts` WRITE;
-/*!40000 ALTER TABLE `budgetdepts` DISABLE KEYS */;
-INSERT INTO `budgetdepts` VALUES (1,'budgetdept','2018-01-07 14:45:16','2018-01-07 14:45:16','Brenda',NULL,'Pasadas',NULL,1,1,'bd@email.com','$2y$10$JreMhPgmD1/Dra0KkSJVE.riAMsQmE8FwYKYTpY1ZqPzUVNUrpyvS','ZErfrMOo6o');
-/*!40000 ALTER TABLE `budgetdepts` ENABLE KEYS */;
+LOCK TABLES `budgetdepartments` WRITE;
+/*!40000 ALTER TABLE `budgetdepartments` DISABLE KEYS */;
+INSERT INTO `budgetdepartments` VALUES (1,'budgetdept','2018-01-07 14:45:16','2018-01-07 14:45:16','Brenda',NULL,'Pasadas',NULL,1,1,'bd@email.com','$2y$10$JreMhPgmD1/Dra0KkSJVE.riAMsQmE8FwYKYTpY1ZqPzUVNUrpyvS','ZErfrMOo6o');
+/*!40000 ALTER TABLE `budgetdepartments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1509,4 +1509,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-14 21:51:17
+-- Dump completed on 2018-01-18 18:41:44

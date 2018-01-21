@@ -5,7 +5,7 @@
  * Date: Sun, 14 Jan 2018 14:45:44 +0000.
  */
 
-namespace App;
+namespace App\Auth;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -53,4 +53,6 @@ class Operation extends Authenticatable
 		'status',
 		'remember_token'
 	];
+
+	protected $table = 'mydb.operations';
 }

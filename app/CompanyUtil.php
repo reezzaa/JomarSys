@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ * Date: Sun, 21 Jan 2018 10:55:10 +0000.
  */
 
 namespace App;
@@ -26,6 +26,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Companyutil extends Eloquent
 {
+	protected $table = 'mydb.companyutils';
 	protected $primaryKey = 'intCompanyUtilID';
 
 	protected $fillable = [

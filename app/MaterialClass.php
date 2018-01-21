@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 14 Jan 2018 14:45:44 +0000.
+ * Date: Sun, 21 Jan 2018 10:55:11 +0000.
  */
 
 namespace App;
@@ -25,6 +25,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Materialclass extends Eloquent
 {
+	protected $table = 'mydb.materialclasses';
 	public $timestamps = false;
 
 	protected $casts = [
