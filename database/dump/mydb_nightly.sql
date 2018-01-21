@@ -71,7 +71,7 @@ CREATE TABLE `budgetdepartments` (
 
 LOCK TABLES `budgetdepartments` WRITE;
 /*!40000 ALTER TABLE `budgetdepartments` DISABLE KEYS */;
-INSERT INTO `budgetdepartments` VALUES (1,'budgetdept','2018-01-07 14:45:16','2018-01-07 14:45:16','Brenda',NULL,'Pasadas',NULL,1,1,'bd@email.com','$2y$10$JreMhPgmD1/Dra0KkSJVE.riAMsQmE8FwYKYTpY1ZqPzUVNUrpyvS','ZErfrMOo6o');
+INSERT INTO `budgetdepartments` VALUES (1,'budgetdept','2018-01-07 14:45:16','2018-01-07 14:45:16','Brenda',NULL,'Pasadas',NULL,1,1,'bd@email.com','$2y$10$cNJFOdPfhMiS/UVInk5ws.lm09YEBceMByXmPSF0LgzNoK4XUHaH6','ZErfrMOo6o');
 /*!40000 ALTER TABLE `budgetdepartments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1509,4 +1509,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-18 18:41:44
+-- Dump completed on 2018-01-21 19:10:26
