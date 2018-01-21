@@ -106,7 +106,7 @@ return [
         ],
         'operations' => [
             'driver' => 'eloquent',
-            'model' => App\Auth\Operations::class,
+            'model' => App\Auth\Operation::class,
         ],
 
 
